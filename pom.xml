@@ -84,6 +84,23 @@
 			</properties>
 		</developer>
 		
+		<developer>
+			<id>RafaJF</id>
+			<name>Rafael Ángel Jiménez Fernández</name>
+			<email>rafaelangeljimenezfer@gmail.com</email>
+			<url>https://github.com/RafaJF</url>
+			<organization>PSG2-2021-G2-22</organization>
+			<organizationUrl>https://github.com/gii-is-psg2/PSG2-2021-G2-22</organizationUrl>
+			<roles>
+				<role>Member Team</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Spain/Madrid</timezone>
+			<properties>
+				<picUrl></picUrl>
+			</properties>
+		</developer>
+		
 	</developers>
 
     <dependencies>
