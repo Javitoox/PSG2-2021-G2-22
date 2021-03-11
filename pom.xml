@@ -66,6 +66,24 @@
 				<picUrl>https://photos.app.goo.gl/LYVdN6kQQ5tSba4m6</picUrl>
 			</properties>
 		</developer>
+		
+		<developer>
+			<id>quiquesm</id>
+			<name>Enrique Salazar Márquez</name>
+			<email>enrsalmar@alum.us.es</email>
+			<url>https://github.com/quiquesm</url>
+			<organization>PSG2-2021-G2-22</organization>
+			<organizationUrl>https://github.com/gii-is-psg2/PSG2-2021-G2-22</organizationUrl>
+			<roles>
+				<role>Member Team</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Spain/Madrid</timezone>
+			<properties>
+				<picUrl></picUrl>
+			</properties>
+		</developer>
+		
 	</developers>
 
     <dependencies>

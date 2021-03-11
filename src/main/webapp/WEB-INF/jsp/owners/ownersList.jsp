@@ -10,7 +10,7 @@
 
     <table id="ownersTable" class="table table-striped">
         <thead>
-        <tr>
+        <tr style = "background-color: #f1f1f1">
             <th style="width: 150px;">Name</th>
             <th style="width: 200px;">Address</th>
             <th>City</th>
