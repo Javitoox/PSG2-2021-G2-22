@@ -31,6 +31,25 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
+    
+    <developers>
+		<developer>
+			<id>Javitoox</id>
+			<name>Javier Martínez Fernández</name>
+			<email>javmarfer3</email>
+			<url>https://github.com/Javitoox</url>
+			<organization>PSG2-2021-G2-22</organization>
+			<organizationUrl>https://github.com/gii-is-psg2/PSG2-2021-G2-22</organizationUrl>
+			<roles>
+				<role>Member Team</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Spain/Madrid</timezone>
+			<properties>
+				<picUrl>https://lh3.googleusercontent.com/6hKhSET9kdUKc3xqtqCsZC-IBOxQmju_U0tlLSN5DacpfFdZ8-XVPH57jTOwKFF9a-2dUA=s85</picUrl>
+			</properties>
+		</developer>
+	</developers>
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
