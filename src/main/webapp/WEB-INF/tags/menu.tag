@@ -7,7 +7,7 @@
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" style="background-color: #90ee90">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand"
