@@ -101,6 +101,23 @@
 			</properties>
 		</developer>
 		
+			<developer>
+			<id>JoseCarlosMorales</id>
+			<name>Jose Carlos Morales Borreguero</name>
+			<email>josmorbor3@alum.us.es</email>
+			<url>https://github.com/JoseCarlosMorales</url>
+			<organization>PSG2-2021-G2-22</organization>
+			<organizationUrl>https://github.com/gii-is-psg2/PSG2-2021-G2-22</organizationUrl>
+			<roles>
+				<role>Member Team</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Spain/Madrid</timezone>
+			<properties>
+				<picUrl></picUrl>
+			</properties>
+		</developer>
+		
 	</developers>
 
     <dependencies>
