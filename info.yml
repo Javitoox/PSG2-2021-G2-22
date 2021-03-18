@@ -7,23 +7,24 @@ project:
       url: 'https://github.com/gii-is-psg2/PSG2-2021-G2-22.git'
   members:
     member1:
+      name: 'Carmen María'
+      surname: 'Muñoz'
+      githubUsername: 'CarmenMariaMP'
+'
+    member2:
       name: 'Rafael Ángel'
       surname: 'Jiménez'
       githubUsername: 'RafaJF'
-    member2:
-      name: 
-      surname: 
-      githubUsername: 
     member3:
-      name: 
-      surname: 
-      githubUsername: 
+      name: 'Javier'
+      surname: 'Martínez'
+      githubUsername: 'Javitoox'
     member4:
-      name: 
-      surname: 
-      githubUsername: 
+      name: 'Enrique'
+      surname: 'Salazar'
+      githubUsername: 'quiquesm'
     member5:
-      name: 
-      surname: 
-      githubUsername: 
+      name: 'José Carlos'
+      surname: 'Morales'
+      githubUsername: 'JoseCarlosMorales'
     
