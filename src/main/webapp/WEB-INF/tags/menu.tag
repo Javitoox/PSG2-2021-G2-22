@@ -40,12 +40,22 @@
 					<span>Veterinarians</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
-					title="hotel">
-					<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
-					<span>Hotel</span>
-				</petclinic:menuItem>
-
+				<sec:authorize access="hasAuthority('owner')">
+					<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
+						title="hotel">
+						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+						<span>Hotel</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('admin')">
+					<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel/list"
+						title="hotel">
+						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
+						<span>Hotel</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
@@ -53,9 +63,6 @@
 				</petclinic:menuItem>
 
 			</ul>
-
-
-
 
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
