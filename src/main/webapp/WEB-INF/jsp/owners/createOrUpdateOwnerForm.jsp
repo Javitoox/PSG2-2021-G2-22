@@ -24,10 +24,10 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <c:choose>
                     <c:when test="${owner['new']}">
-                        <button class="btn btn-default" type="submit">Add Owner</button>
+                        <button class="btn btn-default" type="submit"><fmt:message key="label.createOrUpdateOwnerForm.addOwner"/></button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Update Owner</button>
+                        <button class="btn btn-default" type="submit"><fmt:message key="label.createOrUpdateOwnerForm.updateOwner"/></button>
                     </c:otherwise>
                 </c:choose>
             </div>
