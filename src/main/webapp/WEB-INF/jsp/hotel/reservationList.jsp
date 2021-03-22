@@ -13,6 +13,10 @@
         <tr style = "background-color: #f1f1f1">
             <th>Start date</th>
             <th>End date</th>
+            <th>Special cares</th>
+            <th>Level</th>
+            <th>Pet</th>
+            <th>Owner</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +27,18 @@
                 </td>
                 <td>
                     <c:out value="${reservation.end}"/>
+                </td>
+                <td>
+                    <c:out value="${reservation.specialCares}"/>
+                </td>
+                <td>
+                    <c:out value="${reservation.level}"/>
+                </td>
+                <td>
+                    <c:out value="${reservation.pet.name} with identifier: ${reservation.pet.id}"/>
+                </td>
+                <td>
+                    <c:out value="${reservation.pet.owner.user.username}"/>
                 </td>
             </tr>
         </c:forEach>
