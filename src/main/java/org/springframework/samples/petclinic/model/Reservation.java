@@ -30,7 +30,6 @@ public class Reservation extends BaseEntity{
 	private LocalDate end;
 	
 	@Column(name = "special_Cares")
-	@NotBlank(message = "Required field")
 	private String specialCares;
 	
 	@Column(name = "level")

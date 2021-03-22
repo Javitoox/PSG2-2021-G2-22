@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -35,8 +36,13 @@ public class HotelController {
 	public String initCreationForm(Map<String, Object> model, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-		model.put("reservation", new Reservation());
-		return "hotel/reservation";
+		if(owner == null) {
+			return "hotel/noPets";
+		}else {
+			model.put("pets", owner.getPets());
+			model.put("reservation", new Reservation());
+			return "hotel/reservation";
+		}
 	}
 	
 	@PostMapping

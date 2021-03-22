@@ -22,6 +22,17 @@
 	        <div class="form-group has-feedback">
 	            <petclinic:inputField label="Start date" name="start"/>
 	            <petclinic:inputField label="End date" name="end"/>
+	            <petclinic:inputField label="Special Cares" name="specialCares"/>
+	            <div class="control-group">
+                    <petclinic:selectField name="pet" label="Pet" names="${pets}" size="1"/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Level</label>
+	                <div class="col-sm-offset-2 col-sm-10">
+			            <input class="form" type="radio" name="level" value="STANDARD"> STANDARD<br>
+		                <input type="radio" name="level" value="VIP"> VIP
+	                </div>
+                </div>
 	        </div>
 	        <div class="form-group">
 	            <div class="col-sm-offset-2 col-sm-10">
