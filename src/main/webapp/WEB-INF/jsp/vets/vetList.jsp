@@ -3,9 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <petclinic:layout pageName="vets">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <h2>Veterinarians</h2>
+    
 
     <table id="vetsTable" class="table table-striped">
         <thead>
@@ -17,8 +20,11 @@
         <tbody>
         <c:forEach items="${vets.vetList}" var="vet">
             <tr>
-                <td>
-                    <c:out value="${vet.firstName} ${vet.lastName}"/>
+             	<td>
+                    <spring:url value="/vets/{vetId}/edit" var="vetUrl">
+                        <spring:param name="vetId" value="${vet.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(vetUrl)}"><c:out value="${vet.firstName} ${vet.lastName}"/></a>
                 </td>
                 <td>
                     <c:forEach var="specialty" items="${vet.specialties}">
@@ -30,7 +36,8 @@
         </c:forEach>
         </tbody>
     </table>
-
+	
+	
     <table class="table-buttons">
         <tr>
             <td>
@@ -38,4 +45,11 @@
             </td>            
         </tr>
     </table>
+     
+    
+    <br/>
+    <sec:authorize access="hasAuthority('admin')">
+		<a class="btn btn-default" href='<spring:url value="/vets/new" htmlEscape="true"/>'>Add Vet</a>
+	</sec:authorize>
+	
 </petclinic:layout>
