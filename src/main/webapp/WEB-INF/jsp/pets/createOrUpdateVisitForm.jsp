@@ -15,7 +15,14 @@
         </script>
     </jsp:attribute>
     <jsp:body>
-        <h2><c:if test="${visit['new']}">New </c:if>Visit</h2>
+    
+        <h2>
+        
+        <c:if test="${visit['new']}">
+        	<fmt:message key="label.createOrUpdateVisitForm.new"/> 
+        </c:if> 
+            &nbsp;<fmt:message key="label.createOrUpdateVisitForm.pet"/> 
+        </h2>
 
         <b><fmt:message key="label.createOrUpdateVisitForm.pet"/></b>
         <table class="table table-striped">

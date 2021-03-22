@@ -15,14 +15,17 @@
     </jsp:attribute>
     <jsp:body>
         <h2>
-            <c:if test="${pet['new']}">New </c:if> Pet
+            <c:if test="${pet['new']}">
+            	<fmt:message key="label.createOrUpdatePetForm.new"/> 
+            </c:if> 
+         		&nbsp;<fmt:message key="label.createOrUpdatePetForm.pet"/>
         </h2>
         <form:form modelAttribute="pet"
                    class="form-horizontal">
             <input type="hidden" name="id" value="${pet.id}"/>
             <div class="form-group has-feedback">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Owner</label>
+                    <label class="col-sm-2 control-label"><fmt:message key="label.createOrUpdatePetForm.owner"/></label>
                     <div class="col-sm-10">
                         <c:out value="${pet.owner.firstName} ${pet.owner.lastName}"/>
                     </div>
@@ -30,7 +33,7 @@
                 <petclinic:inputField label="Name" name="name"/>
                 <petclinic:inputField label="Birth Date" name="birthDate"/>
                 <div class="control-group">
-                    <petclinic:selectField name="type" label="Type " names="${types}" size="5"/>
+                    <petclinic:selectField name="type" label="Type" names="${types}" size="5"/>
                 </div>
             </div>
             <div class="form-group">

@@ -9,12 +9,18 @@
               description="Names in the list" %>
 <%@ attribute name="size" required="true" rtexprvalue="true"
               description="Size of Select" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+              
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'error' : '' }"/>
     <c:set var="valid" value="${not status.error and not empty status.actualValue}"/>
     <div class="${cssGroup}">
-        <label class="col-sm-2 control-label">${label}</label>
+        <label class="col-sm-2 control-label">
+        <c:if test="${label=='Type'}">
+                <fmt:message key="label.inputField.type"/>
+            </c:if>
+        </label>
 
         <div class="col-sm-10">
             <form:select class="form-control" path="${name}" items="${names}" size="${size}"/>
