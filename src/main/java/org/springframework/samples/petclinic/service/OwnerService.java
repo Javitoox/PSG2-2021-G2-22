@@ -74,6 +74,14 @@ public class OwnerService {
 		userService.saveUser(owner.getUser());
 		//creating authorities
 		authoritiesService.saveAuthorities(owner.getUser().getUsername(), "owner");
-	}		
+	}
+	@Transactional()
+	public void deleteOwner(Owner owner) throws DataAccessException {
+		userService.deleteUser(owner.getUser());
+	}
+	@Transactional
+	public void deletePet(Owner owner, Pet pet) {
+		owner.getPets().remove(pet);
+	}
 
 }
