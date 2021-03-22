@@ -21,9 +21,7 @@
 	            <petclinic:inputField label="Start date" name="start"/>
 	            <petclinic:inputField label="End date" name="end"/>
 	            <petclinic:inputField label="Special Cares" name="specialCares"/>
-	            <div class="control-group">
-                    <petclinic:selectField name="pet" label="Your pet's identifier" names="${pets}" size="1"/>
-                </div>
+	            <petclinic:inputField label="Your pet's identifier" name="pet"/>
 	            <petclinic:radioField name="level" label="STANDARD"/>
                 <petclinic:radioField name="level" label="VIP"/>
 	        </div>
