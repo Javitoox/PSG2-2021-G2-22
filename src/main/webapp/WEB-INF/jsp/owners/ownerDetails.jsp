@@ -28,6 +28,16 @@
             <td><c:out value="${owner.telephone}"/></td>
         </tr>
     </table>
+    
+    <h2>Pets Information</h2>
+    
+    <table class="table table-striped">
+        <c:forEach var="pet" items="${owner.pets}">
+            <tr>
+                <td><c:out value="${pet.name} with identifier: ${pet.id}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
 
     <spring:url value="{ownerId}/edit" var="editUrl">
         <spring:param name="ownerId" value="${owner.id}"/>
