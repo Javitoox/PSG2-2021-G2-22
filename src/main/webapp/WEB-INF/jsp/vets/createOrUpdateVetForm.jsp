@@ -12,9 +12,7 @@
         <div class="form-group has-feedback">
             <petclinic:inputField label="First Name" name="firstName"/>
             <petclinic:inputField label="Last Name" name="lastName"/>
-           <div class="control-group">
-           		<petclinic:selectField name="specialties" label="Specialties " names="${specialties}" size="5"/>
-            </div>
+           	<petclinic:selectField name="Specialties" label="Specialties " names="${specialties}" size="5"/>
             <petclinic:inputField label="Username" name="user.username"/>
             <petclinic:inputField label="Password" name="user.password"/>
         </div>

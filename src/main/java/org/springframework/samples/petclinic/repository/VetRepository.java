@@ -53,5 +53,8 @@ public interface VetRepository extends Repository<Vet, Integer>{
 	
 	@Query("SELECT vet FROM Vet vet WHERE vet.id =:id")
 	public Vet findById(@Param("id") int id);
+	
+	@Query("SELECT s FROM Specialty s WHERE s.name like :name")
+	Specialty findSpecialtyByName(@Param("name") String name);
 
 }

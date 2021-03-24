@@ -82,5 +82,9 @@ public class VetService {
 		//creating authorities
 		authoritiesService.saveAuthorities(vet.getUser().getUsername(), "vet");
 	}
+	
+	public Specialty findSpecialtyByName(String name) {
+		return this.vetRepository.findSpecialtyByName(name);
+	}
 
 }
