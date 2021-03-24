@@ -49,9 +49,6 @@ public class PetService {
 		this.visitRepository = visitRepository;
 	}
 
-	@Autowired
-	private OwnerService ownerService;
-
 	@Transactional(readOnly = true)
 	public Collection<PetType> findPetTypes() throws DataAccessException {
 		return petRepository.findPetTypes();
@@ -81,9 +78,8 @@ public class PetService {
 	}
 
 	@Transactional()
-	public void deletePet(Pet pet) throws DataAccessException {
-		ownerService.deletePet(pet.getOwner(), pet);
-		petRepository.delete(pet);
+	public void deletePet(Pet pet){
+		petRepository.delete(pet.getId());
 
 	}
 

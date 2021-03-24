@@ -51,7 +51,7 @@ public class PetController {
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
 	private final PetService petService;
-        private final OwnerService ownerService;
+    private final OwnerService ownerService;
 
 	@Autowired
 	public PetController(PetService petService, OwnerService ownerService) {
@@ -150,5 +150,17 @@ public class PetController {
 			return "redirect:/owners/{ownerId}";
 		}
 	}
+        @GetMapping(value = "/pets/{petId}/delete")
+    	public String processDeletePet(@PathVariable("petId")int petId,Owner owner, ModelMap model) {
+    	
+    	Pet pet = petService.findPetById(petId);
+    	if(pet != null && pet.getOwner().equals(owner)) {
+    		petService.deletePet(pet);
+    		return "redirect:/owners/{ownerId}";
+    	}else {
+    		throw new IllegalArgumentException("Pet not found.");
+		}
+    	
+        }
 
 }

@@ -47,6 +47,8 @@ public class OwnerService {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private OwnerService ownerService;
 	
 	@Autowired
 	private AuthoritiesService authoritiesService;
@@ -77,11 +79,7 @@ public class OwnerService {
 	}
 	@Transactional()
 	public void deleteOwner(Owner owner) throws DataAccessException {
-		userService.deleteUser(owner.getUser());
-	}
-	@Transactional
-	public void deletePet(Owner owner, Pet pet) {
-		owner.getPets().remove(pet);
+		ownerRepository.delete(owner);
 	}
 
 }
