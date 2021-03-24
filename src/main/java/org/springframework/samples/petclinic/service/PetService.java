@@ -79,7 +79,7 @@ public class PetService {
 
 	@Transactional()
 	public void deletePet(Pet pet){
-		petRepository.delete(pet.getId());
+		petRepository.delete(pet);
 
 	}
 
