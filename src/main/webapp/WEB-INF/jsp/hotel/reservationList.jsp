@@ -6,17 +6,17 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="reservations">
-    <h2>Reservations</h2>
+    <h2><fmt:message key="label.reservation"/></h2>
 
     <table id="reservationsTable" class="table table-striped">
         <thead>
         <tr style = "background-color: #f1f1f1">
-            <th>Start date</th>
-            <th>End date</th>
-            <th>Special cares</th>
-            <th>Level</th>
-            <th>Pet</th>
-            <th>Owner</th>
+            <th><fmt:message key="label.reservationList.startDate"/></th>
+            <th><fmt:message key="label.reservationList.endDate"/></th>
+            <th><fmt:message key="label.reservationList.specialCares"/></th>
+            <th><fmt:message key="label.reservationList.level"/></th>
+            <th><fmt:message key="label.reservationList.pet"/></th>
+            <th><fmt:message key="label.reservationList.owner"/></th>
         </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                     <c:out value="${reservation.level}"/>
                 </td>
                 <td>
-                    <c:out value="${reservation.pet.name} with identifier: ${reservation.pet.id}"/>
+                    <c:out value="${reservation.pet.name} con identificador: ${reservation.pet.id}"/>
                 </td>
                 <td>
                     <c:out value="${reservation.pet.owner.user.username}"/>

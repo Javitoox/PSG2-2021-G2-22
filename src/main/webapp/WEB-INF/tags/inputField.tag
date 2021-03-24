@@ -45,6 +45,18 @@
             <c:if test="${label=='Birth Date'}">
                 <fmt:message key="label.inputField.birthdate"/>
             </c:if>
+            <c:if test="${label=='Start date'}">
+                <fmt:message key="label.inputField.startdate"/>
+            </c:if>
+            <c:if test="${label=='End date'}">
+                <fmt:message key="label.inputField.enddate"/>
+            </c:if>
+            <c:if test="${label=='Special Cares'}">
+                <fmt:message key="label.inputField.specialCares"/>
+            </c:if>
+            <c:if test="${label=='Your pets identifier'}">
+                <fmt:message key="label.inputField.petIndentifier"/>
+            </c:if>
              
          </label>
 
