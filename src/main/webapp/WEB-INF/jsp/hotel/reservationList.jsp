@@ -17,6 +17,7 @@
             <th>Level</th>
             <th>Pet</th>
             <th>Owner</th>
+          <%--  <th>Actions</th> --%>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,13 @@
                 <td>
                     <c:out value="${reservation.pet.owner.user.username}"/>
                 </td>
+                <%-- <td>
+                	<spring:url value="/hotel/{reservationId}/delete" var="deleteReservationUrl">
+                        <spring:param name="reservationId" value="${reservation.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(deleteReservationUrl)}" class="glyphicon glyphicon-remove-circle"></a>
+                </td>
+                --%>
             </tr>
         </c:forEach>
         </tbody>

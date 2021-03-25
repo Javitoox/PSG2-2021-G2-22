@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,15 +12,21 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Reservation;
+import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.ReservationService;
+import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.samples.petclinic.util.ReservationValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
@@ -34,13 +41,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HotelController {
 	
 	private final ReservationService reservationService;
-	
+	private final PetService petService;
 	private final OwnerService ownerService;
 	
 	@Autowired
-	public HotelController(ReservationService reservationService, OwnerService ownerService) {
+	public HotelController(ReservationService reservationService, OwnerService ownerService,PetService petService) {
 		this.reservationService = reservationService;
 		this.ownerService = ownerService;
+		this.petService = petService;
 	}
 	
 	@ModelAttribute("pets")
@@ -105,4 +113,24 @@ public class HotelController {
 		return "hotel/reservationList";
 	}
 
+//	@GetMapping(value = "/hotel/{reservationId}/delete")
+//	public String deleteReservation(@PathVariable("reservationId") int reservationId, ModelMap model) {
+//		Optional<Reservation> reservation = reservationService.findReservationById(reservationId);
+//		System.out.println("-------------------------------    "+ reservation);
+//			Pet pet = reservation.get().getPet();
+//			pet.removeReservation(reservation.get());
+//			try {
+//				petService.savePet(pet);
+//			} catch (DataAccessException | DuplicatedPetNameException e) {
+//				e.printStackTrace();
+//			}
+//		
+//			try {
+//				reservationService.deleteReservation(reservation.get());
+//			} catch (DataAccessException e) {
+//				e.printStackTrace();
+//			}
+//			return "hotel/reservationList";
+//	}
+	
 }
