@@ -97,7 +97,7 @@ public class HotelController {
 				}
 			}
 			if(reservation.getPet() != null && !owner.getPets().contains(reservation.getPet())) {
-				FieldError e = new FieldError("reservation", "pet", "You must select a pet associated with you");
+				FieldError e = new FieldError("reservation", "pet", "Debes seleccionar una mascota asociada a ti");
 				result.addError(e);
 			}
 			return "hotel/reservation";

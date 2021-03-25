@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <petclinic:layout pageName="owners">
@@ -14,16 +15,23 @@
         </script>
     </jsp:attribute>
     <jsp:body>
-        <h2><c:if test="${visit['new']}">New </c:if>Visit</h2>
+    
+        <h2>
+        
+        <c:if test="${visit['new']}">
+        	<fmt:message key="label.createOrUpdateVisitForm.new"/> 
+        </c:if> 
+            &nbsp;<fmt:message key="label.createOrUpdateVisitForm.pet"/> 
+        </h2>
 
-        <b>Pet</b>
+        <b><fmt:message key="label.createOrUpdateVisitForm.pet"/></b>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Birth Date</th>
-                <th>Type</th>
-                <th>Owner</th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.name"/></th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.birthDay"/></th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.type"/></th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.owner"/></th>
             </tr>
             </thead>
             <tr>
@@ -43,17 +51,17 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="petId" value="${visit.pet.id}"/>
-                    <button class="btn btn-default" type="submit">Add Visit</button>
+                    <button class="btn btn-default" type="submit"><fmt:message key="label.createOrUpdateVisitForm.addVisit"/></button>
                 </div>
             </div>
         </form:form>
 
         <br/>
-        <b>Previous Visits</b>
+        <b><fmt:message key="label.createOrUpdateVisitForm.previousVisit"/></b>
         <table class="table table-striped">
             <tr>
-                <th>Date</th>
-                <th>Description</th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.date"/></th>
+                <th><fmt:message key="label.createOrUpdateVisitForm.description"/></th>
             </tr>
             <c:forEach var="visit" items="${visit.pet.visits}">
                 <c:if test="${!visit['new']}">

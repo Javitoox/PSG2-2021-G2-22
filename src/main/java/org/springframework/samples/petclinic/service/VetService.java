@@ -76,11 +76,7 @@ public class VetService {
 		return this.vetRepository.findSpecialtyByName(name);
 	}
 	
-	}
-	@Transactional(readOnly = true)
-	public Vet findVetById(int id) throws DataAccessException {
-		return this.vetRepository.findVetById(id);
-	}
+	
 
 	@Transactional()
 	public void deleteVet(Vet vet) throws DataAccessException {
