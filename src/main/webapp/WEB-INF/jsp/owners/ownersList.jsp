@@ -12,11 +12,14 @@
     <table id="ownersTable" class="table table-striped">
         <thead>
         <tr style = "background-color: #f1f1f1">
+
             <th style="width: 150px;"><fmt:message key="label.ownersList.name"/></th>
             <th style="width: 200px;"><fmt:message key="label.ownersList.address"/></th>
             <th><fmt:message key="label.ownersList.city"/></th>
             <th style="width: 120px"><fmt:message key="label.ownersList.telephone"/></th>
             <th><fmt:message key="label.ownersList.pets"/></th>
+             <th><fmt:message key="label.ownersDetails.action"/></th>
+
         </tr>
         </thead>
         <tbody>
@@ -41,6 +44,12 @@
                     <c:forEach var="pet" items="${owner.pets}">
                         <c:out value="${pet.name} "/>
                     </c:forEach>
+                </td>
+                <td>
+                	<spring:url value="/owners/{ownerId}/deleteOwner" var="deleteOwnerUrl">
+                        <spring:param name="ownerId" value="${owner.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(deleteOwnerUrl)}" class="glyphicon glyphicon-remove-circle"></a>
                 </td>
                 
       

@@ -11,12 +11,16 @@
     <table id="reservationsTable" class="table table-striped">
         <thead>
         <tr style = "background-color: #f1f1f1">
+
             <th><fmt:message key="label.reservationList.startDate"/></th>
             <th><fmt:message key="label.reservationList.endDate"/></th>
             <th><fmt:message key="label.reservationList.specialCares"/></th>
             <th><fmt:message key="label.reservationList.level"/></th>
             <th><fmt:message key="label.reservationList.pet"/></th>
             <th><fmt:message key="label.reservationList.owner"/></th>
+
+          <%--  <th>Actions</th> --%>
+
         </tr>
         </thead>
         <tbody>
@@ -42,6 +46,13 @@
                 <td>
                     <c:out value="${reservation.pet.owner.user.username}"/>
                 </td>
+                <%-- <td>
+                	<spring:url value="/hotel/{reservationId}/delete" var="deleteReservationUrl">
+                        <spring:param name="reservationId" value="${reservation.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(deleteReservationUrl)}" class="glyphicon glyphicon-remove-circle"></a>
+                </td>
+                --%>
             </tr>
         </c:forEach>
         </tbody>

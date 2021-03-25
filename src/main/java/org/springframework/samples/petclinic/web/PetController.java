@@ -19,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Reservation;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -37,6 +39,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetService;
+import org.springframework.samples.petclinic.service.ReservationService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 
 /**
@@ -51,12 +54,15 @@ public class PetController {
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
 	private final PetService petService;
-        private final OwnerService ownerService;
+    private final OwnerService ownerService;
+    private final ReservationService reservationService;
 
 	@Autowired
-	public PetController(PetService petService, OwnerService ownerService) {
+	public PetController(PetService petService, OwnerService ownerService, ReservationService reservationService) {
 		this.petService = petService;
-                this.ownerService = ownerService;
+        this.ownerService = ownerService;
+        this.reservationService = reservationService;
+                
 	}
 
 	@ModelAttribute("types")
@@ -150,5 +156,22 @@ public class PetController {
 			return "redirect:/owners/{ownerId}";
 		}
 	}
+        @GetMapping(value = "/pets/{petId}/delete")
+    	public String processDeletePet(@PathVariable("petId")int petId,Owner owner, Model model) {
+    	Pet pet = petService.findPetById(petId);
+//    	Collection<Visit> visits = petService.findVisitsByPetId(pet.getId());
+    	Collection<Reservation> reservations = reservationService.findReservationsByPetId(petId);
+    	if(pet != null && pet.getOwner().equals(owner)) {
+    		ownerService.findOwnerById(owner.getId()).removePet(pet);
+//    		petService.deletePetVisits(visits);
+    		reservationService.deleteAllReservations(reservations);
+    		petService.deletePet(pet);
+    		ownerService.saveOwner(owner);
+    		return "redirect:/owners/{ownerId}";
+    	} else {
+    		throw new IllegalArgumentException("Pet not found.");
+		}
+    	
+     }
 
 }

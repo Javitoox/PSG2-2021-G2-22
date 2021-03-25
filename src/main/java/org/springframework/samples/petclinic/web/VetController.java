@@ -16,13 +16,32 @@
 package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.samples.petclinic.model.Specialty;
+import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
+import org.springframework.samples.petclinic.service.AuthoritiesService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 /**
  * @author Juergen Hoeller
@@ -32,12 +51,44 @@ import java.util.Map;
  */
 @Controller
 public class VetController {
+	
+	private static final String VIEWS_VET_CREATE_OR_UPDATE_FORM = "vets/createOrUpdateVetForm";
 
 	private final VetService vetService;
 
 	@Autowired
 	public VetController(VetService clinicService) {
 		this.vetService = clinicService;
+	}
+	
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
+	}
+	
+	@GetMapping(value = "/vets/new")
+	public String initCreationForm(Map<String, Object> model) {
+		Vet vet = new Vet();
+		model.put("vet", vet);
+		model.put("specialties", vetService.findSpecialties());
+		return "vets/vetNew";
+	}
+
+	@PostMapping(value = "/vets/new")
+	public String processCreationForm(@Valid Vet vet, BindingResult result, Map<String, Object> model,@RequestParam("Specialties") String specialties) {
+		if (result.hasErrors()) {
+			return "vets/vetNew";
+		}
+		else {
+			//creating owner, user and authorities
+			List<Specialty> SpecialtiesSelected = this.specialtiesParse(specialties);
+			for(Specialty s : SpecialtiesSelected) {
+				vet.addSpecialty(s);
+			}
+			this.vetService.saveVet(vet);	
+			
+			return "redirect:/vets";
+		}
 	}
 
 	@GetMapping(value = { "/vets" })
@@ -61,4 +112,51 @@ public class VetController {
 		return vets;
 	}
 
+	
+	@GetMapping(value = "/vets/{vetId}/edit")
+	public String initUpdateVetForm(@PathVariable("vetId") int vetId, Map<String, Object> model) {
+		Vet vet = this.vetService.findVetById(vetId);
+		model.put("vet", vet);
+		model.put("specialties", vetService.findSpecialties());
+		return "vets/vetEdit";
+	}
+
+	@PostMapping(value = "/vets/{vetId}/edit")
+	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,
+			@PathVariable("vetId") int vetId, @RequestParam("Specialties") String specialties) {
+		if (result.hasErrors()) {
+			return "vets/vetEdit";
+		}
+		else {
+			List<Specialty> SpecialtiesSelected = this.specialtiesParse(specialties);
+			for(Specialty s : SpecialtiesSelected) {
+				vet.addSpecialty(s);
+			}
+			vet.setId(vetId);
+			this.vetService.saveVet(vet);
+			return "redirect:/vets";
+		}
+	}
+	
+	public List<Specialty> specialtiesParse(String text){
+		List<Specialty> res = new ArrayList<Specialty>();
+		
+		String[] specialties = text.split(",");
+		for(int i=0;i<specialties.length;i++) {
+			String stringSpecialty = specialties[i];
+			Specialty specialtyParsed = this.vetService.findSpecialtyByName(stringSpecialty);
+			res.add(specialtyParsed);
+		}
+		
+		return res;
+	}
+
+	@GetMapping(value = "/vets/{vetId}/delete")
+	public String deleteVet(@PathVariable("vetId")int vetId, Model model) {
+	Vet vet = vetService.findVetById(vetId);
+	vetService.deleteVet(vet);
+	return "redirect:/vets";
+	
+	}
+  
 }
