@@ -16,10 +16,16 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 
 /**
@@ -42,9 +48,19 @@ public interface VetRepository extends Repository<Vet, Integer> {
 	 */
 	Collection<Vet> findAll() throws DataAccessException;
 	
+	void save(Vet vet) throws DataAccessException;
+	
+	@Query("SELECT specialties FROM Specialty specialties ORDER BY specialties.name")
+	List<Specialty> findSpecialties() throws DataAccessException;
+	
+	@Query("SELECT vet FROM Vet vet WHERE vet.id =:id")
+	public Vet findById(@Param("id") int id);
+	
+	@Query("SELECT s FROM Specialty s WHERE s.name like :name")
+	Specialty findSpecialtyByName(@Param("name") String name);
+	
 	Vet findVetById(int id) throws DataAccessException;
 	
 	void delete(Vet vet) throws DataAccessException;
-	
-
+  
 }
