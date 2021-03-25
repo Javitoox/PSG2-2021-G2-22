@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "reservation")
+@Table(name = "reservations")
 public class Reservation extends BaseEntity{
 	
 	@Column(name = "start")
@@ -30,7 +29,7 @@ public class Reservation extends BaseEntity{
 	@NotNull(message = "Campo requerido")
 	private LocalDate end;
 	
-	@Column(name = "special_Cares")
+	@Column(name = "special_cares")
 	private String specialCares;
 	
 	@Column(name = "level")
