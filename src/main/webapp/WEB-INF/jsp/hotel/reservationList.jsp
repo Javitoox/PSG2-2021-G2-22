@@ -36,7 +36,7 @@
                 </td>
                 <td>
 
-                    <c:out value="${reservation.pet.name} with identifier:${reservation.pet.id}"/>
+                    <c:out value="${reservation.pet.name} con identificador:${reservation.pet.id}"/>
 
                 </td>
                 <td>
