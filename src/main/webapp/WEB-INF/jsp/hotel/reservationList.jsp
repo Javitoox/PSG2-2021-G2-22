@@ -17,7 +17,7 @@
             <th>Level</th>
             <th>Pet</th>
             <th>Owner</th>
-            <th>Actions</th>
+          <%--  <th>Actions</th> --%>
         </tr>
         </thead>
         <tbody>
