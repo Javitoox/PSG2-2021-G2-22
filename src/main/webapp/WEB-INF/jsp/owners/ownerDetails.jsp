@@ -33,7 +33,7 @@
     <table class="table table-striped">
         <c:forEach var="pet" items="${owner.pets}">
             <tr>
-                <td><c:out value="${pet.name} with identifier: ${pet.id}"/></td>
+                <td><c:out value="${pet.name} with identifier:${pet.id}"/></td>
             </tr>
         </c:forEach>
     </table>
