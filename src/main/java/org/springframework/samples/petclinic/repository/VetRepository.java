@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -56,5 +57,9 @@ public interface VetRepository extends Repository<Vet, Integer>{
 	
 	@Query("SELECT s FROM Specialty s WHERE s.name like :name")
 	Specialty findSpecialtyByName(@Param("name") String name);
+	
+//	@Modifying
+//	@Query("UPDATE Vet v WHERE vet.id = ?1")
+//	void modificarVet(Integer vetId);
 
 }

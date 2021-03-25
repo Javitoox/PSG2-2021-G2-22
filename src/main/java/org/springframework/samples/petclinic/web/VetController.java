@@ -55,7 +55,7 @@ public class VetController {
 	private final VetService vetService;
 
 	@Autowired
-	public VetController(VetService clinicService,UserService userService, AuthoritiesService authoritiesService) {
+	public VetController(VetService clinicService) {
 		this.vetService = clinicService;
 	}
 	
@@ -69,13 +69,13 @@ public class VetController {
 		Vet vet = new Vet();
 		model.put("vet", vet);
 		model.put("specialties", vetService.findSpecialties());
-		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+		return "vets/vetNew";
 	}
 
 	@PostMapping(value = "/vets/new")
 	public String processCreationForm(@Valid Vet vet, BindingResult result, Map<String, Object> model,@RequestParam("Specialties") String specialties) {
 		if (result.hasErrors()) {
-			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+			return "vets/vetNew";
 		}
 		else {
 			//creating owner, user and authorities
@@ -115,20 +115,21 @@ public class VetController {
 		Vet vet = this.vetService.findVetById(vetId);
 		model.put("vet", vet);
 		model.put("specialties", vetService.findSpecialties());
-		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+		return "vets/vetEdit";
 	}
 
 	@PostMapping(value = "/vets/{vetId}/edit")
 	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,
 			@PathVariable("vetId") int vetId, @RequestParam("Specialties") String specialties) {
 		if (result.hasErrors()) {
-			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+			return "vets/vetEdit";
 		}
 		else {
 			List<Specialty> SpecialtiesSelected = this.specialtiesParse(specialties);
 			for(Specialty s : SpecialtiesSelected) {
 				vet.addSpecialty(s);
 			}
+			vet.setId(vetId);
 			this.vetService.saveVet(vet);
 			return "redirect:/vets";
 		}

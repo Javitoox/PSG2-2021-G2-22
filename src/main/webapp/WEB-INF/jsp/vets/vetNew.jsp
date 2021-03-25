@@ -8,7 +8,7 @@
 
 <petclinic:layout pageName="vets">
     <h2>NEW VET</h2>
-    <form:form modelAttribute="vet" class="form-horizontal" id="add-vet-form" >
+    <form:form modelAttribute="vet" class="form-horizontal" id="add-vet-form1" action="/vets/new">
         <div class="form-group has-feedback">
             <petclinic:inputField label="First Name" name="firstName"/>
             <petclinic:inputField label="Last Name" name="lastName"/>

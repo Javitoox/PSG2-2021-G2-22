@@ -7,15 +7,15 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="vets">
-    <h2>NEW VET</h2>
-    <form:form modelAttribute="vet" class="form-horizontal" id="add-vet-form" >
+    <h2>EDIT VET</h2>
+    <form:form modelAttribute="vet" class="form-horizontal" id="add-vet-form2" action="/vets/${vet.id}/edit">
         <div class="form-group has-feedback">
             <petclinic:inputField label="First Name" name="firstName"/>
             <petclinic:inputField label="Last Name" name="lastName"/>
            	<petclinic:selectField name="Specialties" label="Specialties " names="${specialties}" size="5"/>
         </div>
         <div class="form-group">
-          <button class="btn btn-default" type="submit">Add Vet</button>    
+          <button class="btn btn-default" type="submit">Edit Vet</button>    
         </div>
     </form:form>
 </petclinic:layout>
