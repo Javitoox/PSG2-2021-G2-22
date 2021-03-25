@@ -26,17 +26,17 @@ public class ReservationValidator implements Validator {
 		Pet pet = reservation.getPet();
 		
 		if (start != null && end != null && start.isAfter(end)) {
-			errors.rejectValue("start", "The start date cannot be later than the end date",
-					"The start date cannot be later than the end date");
+			errors.rejectValue("start", "La fecha de inicio no puede ser posterior que la fecha de fin",
+					"La fecha de inicio no puede ser posterior que la fecha de fin");
 		}
 		
 		if(level != null && !level.equals("STANDARD") && !level.equals("VIP")) {
-			errors.rejectValue("level", "The reservation level must be standard or vip",
-					"The reservation level must be standard or vip");
+			errors.rejectValue("level", "El nivel de reserva debe ser STANDARD o VIP",
+					"El nivel de reserva debe ser STANDARD o VIP");
 		}
 		
 		if(pet == null) {
-			errors.rejectValue("pet", "Required valid field", "Required valid field");
+			errors.rejectValue("pet", "Campo requerido", "Campo requerido");
 		}
 
 	}

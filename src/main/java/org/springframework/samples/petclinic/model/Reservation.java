@@ -20,21 +20,21 @@ public class Reservation extends BaseEntity{
 	
 	@Column(name = "start")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@Future(message = "The date must be a future date")
-	@NotNull(message = "Required field")
+	@Future(message = "La fecha debe ser futura")
+	@NotNull(message = "Campo requerido")
 	private LocalDate start;
 	
 	@Column(name = "end")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@Future(message = "The date must be a future date")
-	@NotNull(message = "Required field")
+	@Future(message = "La fecha debe ser futura")
+	@NotNull(message = "Campo requerido")
 	private LocalDate end;
 	
 	@Column(name = "special_Cares")
 	private String specialCares;
 	
 	@Column(name = "level")
-	@NotBlank(message = "Required field")
+	@NotBlank(message = "Campo requerido")
 	private String level;
 	
 	@ManyToOne

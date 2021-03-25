@@ -103,7 +103,7 @@ public class HotelControllerTests {
 		                    .param("level", "VIP"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeHasFieldErrors("reservation", "pet"))
-				.andExpect(model().attributeHasFieldErrorCode("reservation", "pet", "Required valid field"))
+				.andExpect(model().attributeHasFieldErrorCode("reservation", "pet", "Campo requerido"))
 				.andExpect(view().name("hotel/reservation"));
 	}
 	
@@ -172,7 +172,7 @@ public class HotelControllerTests {
 		                    .param("level", "VIPsss"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeHasFieldErrors("reservation", "level"))
-				.andExpect(model().attributeHasFieldErrorCode("reservation", "level", "The reservation level must be standard or vip"))
+				.andExpect(model().attributeHasFieldErrorCode("reservation", "level", "El nivel de reserva debe ser STANDARD o VIP"))
 				.andExpect(view().name("hotel/reservation"));
 	}
 	
