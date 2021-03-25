@@ -5,7 +5,12 @@
               description="Name of corresponding property in bean object" %>
 <%@ attribute name="label" required="true" rtexprvalue="true"
               description="Label appears in red color if input is considered as invalid after submission" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ attribute name="required" required="false" rtexprvalue="true"
+              description="Required appears if the input is required" %>
+
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
@@ -54,14 +59,12 @@
             <c:if test="${label=='Special Cares'}">
                 <fmt:message key="label.inputField.specialCares"/>
             </c:if>
-            <c:if test="${label=='Your pets identifier'}">
-                <fmt:message key="label.inputField.petIndentifier"/>
-            </c:if>
+            
              
          </label>
 
         <div class="col-sm-10">
-            <form:input class="form-control" path="${name}"/>
+            <form:input class="form-control" path="${name}" required="${required}"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>

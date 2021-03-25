@@ -35,7 +35,9 @@
                     <c:out value="${reservation.level}"/>
                 </td>
                 <td>
-                    <c:out value="${reservation.pet.name} con identificador: ${reservation.pet.id}"/>
+
+                    <c:out value="${reservation.pet.name} with identifier:${reservation.pet.id}"/>
+
                 </td>
                 <td>
                     <c:out value="${reservation.pet.owner.user.username}"/>

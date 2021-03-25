@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Reservation;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +18,12 @@ class ReservationServiceTests {
 	@Autowired
 	protected ReservationService reservationService;
 	
-	@Autowired
-	protected PetService petService;
-	
 	@Test
-	void shouldGetAllReservations()  {
-	    Pet pet = this.petService.findPetById(1);
+	void shouldGetAtLeastOneReservations()  {
 		Reservation reservation = new Reservation();
 		reservation.setStart(LocalDate.of(LocalDate.now().getYear()+1, 8, 13));
 		reservation.setEnd(LocalDate.of(LocalDate.now().getYear()+1, 8, 15));
 		reservation.setSpecialCares("Special foods with proteins");
-		reservation.setPet(pet);
 		reservation.setLevel("VIP");
 		this.reservationService.saveReservation(reservation);
 		
