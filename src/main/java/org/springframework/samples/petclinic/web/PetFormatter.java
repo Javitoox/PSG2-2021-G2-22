@@ -22,7 +22,7 @@ public class PetFormatter implements Formatter<Pet>{
 	@Override
 	public String print(Pet object, Locale locale) {
 		// TODO Auto-generated method stub
-		return object.getName()+" with identifier:"+object.getId();
+		return object.getName()+" con identificador:"+object.getId();
 	}
 
 	@Override

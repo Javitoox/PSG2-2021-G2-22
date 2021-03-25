@@ -7,16 +7,18 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <petclinic:layout pageName="vets">
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-    <h2>Veterinarians</h2>
-    
+
+    <h2><fmt:message key="label.vetList.vets"/></h2>
+
 
     <table id="vetsTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Specialties</th>
-            <th>Actions</th>
+
+            <th><fmt:message key="label.vetList.name"/></th>
+            <th><fmt:message key="label.vetList.specialties"/></th>
+            <th><fmt:message key="label.ownersDetails.action"/></th>
+
         </tr>
         </thead>
         <tbody>
@@ -49,7 +51,7 @@
     <table class="table-buttons">
         <tr>
             <td>
-                <a href="<spring:url value="/vets.xml" htmlEscape="true" />">View as XML</a>
+                <a href="<spring:url value="/vets.xml" htmlEscape="true" />"><fmt:message key="label.vetList.xml"/></a>
             </td>            
         </tr>
     </table>
@@ -57,7 +59,7 @@
     
     <br/>
     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/vets/new" htmlEscape="true"/>'>Add Vet</a>
+		<a class="btn btn-default" href='<spring:url value="/vets/new" htmlEscape="true"/>'><fmt:message key="label.vetList.addVet"/></a>
 	</sec:authorize>
 	
 </petclinic:layout>

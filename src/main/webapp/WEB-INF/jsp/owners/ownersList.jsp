@@ -5,18 +5,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
+
 <petclinic:layout pageName="owners">
-    <h2>Owners</h2>
+    <h2><fmt:message key="label.ownersList.owner"/></h2>
 
     <table id="ownersTable" class="table table-striped">
         <thead>
         <tr style = "background-color: #f1f1f1">
-            <th style="width: 150px;">Name</th>
-            <th style="width: 200px;">Address</th>
-            <th>City</th>
-            <th style="width: 120px">Telephone</th>
-            <th>Pets</th>
-            <th>Actions</th>            
+
+            <th style="width: 150px;"><fmt:message key="label.ownersList.name"/></th>
+            <th style="width: 200px;"><fmt:message key="label.ownersList.address"/></th>
+            <th><fmt:message key="label.ownersList.city"/></th>
+            <th style="width: 120px"><fmt:message key="label.ownersList.telephone"/></th>
+            <th><fmt:message key="label.ownersList.pets"/></th>
+             <th><fmt:message key="label.ownersDetails.action"/></th>
+
         </tr>
         </thead>
         <tbody>
