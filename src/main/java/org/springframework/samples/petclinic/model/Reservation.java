@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -81,5 +82,5 @@ public class Reservation extends BaseEntity{
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
-	
+
 }

@@ -32,7 +32,7 @@
                 <spring:url value="/vets/{vetId}/delete" var="deleteVetUrl">
                 	<spring:param name="vetId" value="${vet.id}"/>
                 </spring:url>
-                <a onclick="confirm('Delete vet?')" href="${fn:escapeXml(deleteVetUrl)}" class="glyphicon glyphicon-remove-circle"></a>
+                <a href="${fn:escapeXml(deleteVetUrl)}" class="glyphicon glyphicon-remove-circle"></a>
                 </td>
             </tr>
         </c:forEach>

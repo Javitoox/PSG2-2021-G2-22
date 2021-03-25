@@ -37,8 +37,6 @@ public class OwnerService {
 	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private OwnerService ownerService;
 	
 	@Autowired
 	private AuthoritiesService authoritiesService;
