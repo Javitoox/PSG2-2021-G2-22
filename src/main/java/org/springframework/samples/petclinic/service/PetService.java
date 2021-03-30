@@ -19,6 +19,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Visit;
@@ -39,13 +40,11 @@ import org.springframework.util.StringUtils;
 public class PetService {
 
 	private PetRepository petRepository;
-	
+
 	private VisitRepository visitRepository;
-	
 
 	@Autowired
-	public PetService(PetRepository petRepository,
-			VisitRepository visitRepository) {
+	public PetService(PetRepository petRepository, VisitRepository visitRepository) {
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
 	}
@@ -54,7 +53,7 @@ public class PetService {
 	public Collection<PetType> findPetTypes() throws DataAccessException {
 		return petRepository.findPetTypes();
 	}
-	
+
 	@Transactional
 	public void saveVisit(Visit visit) throws DataAccessException {
 		visitRepository.save(visit);
@@ -64,19 +63,41 @@ public class PetService {
 	public Pet findPetById(int id) throws DataAccessException {
 		return petRepository.findById(id);
 	}
-
+	
 	@Transactional(rollbackFor = DuplicatedPetNameException.class)
 	public void savePet(Pet pet) throws DataAccessException, DuplicatedPetNameException {
-			Pet otherPet=pet.getOwner().getPetwithIdDifferent(pet.getName(), pet.getId());
-            if (StringUtils.hasLength(pet.getName()) &&  (otherPet!= null && otherPet.getId()!=pet.getId())) {            	
-            	throw new DuplicatedPetNameException();
-            }else
-                petRepository.save(pet);                
+		Pet otherPet = pet.getOwner().getPetwithIdDifferent(pet.getName(), pet.getId());
+		if (StringUtils.hasLength(pet.getName()) && (otherPet != null && otherPet.getId() != pet.getId())) {
+			throw new DuplicatedPetNameException();
+		} else
+			petRepository.save(pet);
+	}
+
+	@Transactional(readOnly = true)
+	public Visit findVisitById(int id) throws DataAccessException {
+		return visitRepository.findVisitById(id);
+	}
+	
+	public Collection<Visit> findVisitsByPetId(int petId) {
+		return visitRepository.findByPetId(petId);
 	}
 
 
-	public Collection<Visit> findVisitsByPetId(int petId) {
-		return visitRepository.findByPetId(petId);
+	@Transactional()
+	public void deletePet(Pet pet) throws DataAccessException{
+		petRepository.delete(pet);
+
+	}
+	@Transactional()
+	public void deletePetVisit(Visit visit) throws DataAccessException{
+		visitRepository.delete(visit);
+	}
+	
+	@Transactional()
+	public void deletePetVisits(Collection<Visit> visits) throws DataAccessException{
+		for (Visit v : visits) {
+			visitRepository.delete(v);
+		}
 	}
 
 }

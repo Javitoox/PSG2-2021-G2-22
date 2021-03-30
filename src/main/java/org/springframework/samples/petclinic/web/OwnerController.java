@@ -45,10 +45,12 @@ public class OwnerController {
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
 	private final OwnerService ownerService;
+	private final UserService userService;
 
 	@Autowired
 	public OwnerController(OwnerService ownerService, UserService userService, AuthoritiesService authoritiesService) {
 		this.ownerService = ownerService;
+		this.userService = userService;
 	}
 
 	@InitBinder
@@ -94,7 +96,7 @@ public class OwnerController {
 		Collection<Owner> results = this.ownerService.findOwnerByLastName(owner.getLastName());
 		if (results.isEmpty()) {
 			// no owners found
-			result.rejectValue("lastName", "notFound", "not found");
+			result.rejectValue("lastName", "No encontrado", "No encontrado");
 			return "owners/findOwners";
 		}
 		else if (results.size() == 1) {
@@ -140,5 +142,11 @@ public class OwnerController {
 		mav.addObject(this.ownerService.findOwnerById(ownerId));
 		return mav;
 	}
-
+	@GetMapping(value = "/owners/{ownerId}/deleteOwner")
+	public String deleteOwner(@PathVariable("ownerId")final int ownerId, final Model model) {
+		Owner owner = ownerService.findOwnerById(ownerId);	
+		ownerService.deleteOwner(owner);	
+		return "redirect:/owners";
+	
+	}
 }
