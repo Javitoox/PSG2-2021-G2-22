@@ -12,7 +12,7 @@
         <div class="form-group has-feedback">
             <petclinic:inputField label="First Name" name="firstName"/>
             <petclinic:inputField label="Last Name" name="lastName"/>
-           	<petclinic:selectField name="Specialties" label="Specialties " names="${specialties}" size="5"/>
+           	<petclinic:selectMultipleField name="specialty2" label="Specialties " names="${specialties}" size="5"/>
         </div>
         <div class="form-group">
           <button class="btn btn-default" type="submit"><fmt:message key="label.vetNew.addVet"/></button>    
