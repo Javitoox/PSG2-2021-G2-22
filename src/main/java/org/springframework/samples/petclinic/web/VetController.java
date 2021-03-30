@@ -94,7 +94,11 @@ public class VetController {
 
 	@PostMapping(value = "/vets/new")
 	public String processCreationForm(@Valid Vet vet, BindingResult result, Map<String, Object> model) {
-		if (result.hasErrors()) {
+		if (result.hasErrors()|| vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+			if(vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+				FieldError e = new FieldError("vet", "specialty2", "seleccione alguna especialidad");
+				result.addError(e);
+			}
 			return "vets/vetNew";
 		}
 		else {
@@ -139,7 +143,12 @@ public class VetController {
 
 	@PostMapping(value = "/vets/{vetId}/edit")
 	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,@PathVariable("vetId") int vetId) {
-		if (result.hasErrors()) {
+		if (result.hasErrors() || vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+			if(vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+				FieldError e = new FieldError("vet", "specialty2", "seleccione alguna especialidad");
+				result.addError(e);
+			}
+			vet.setId(vetId);
 			return "vets/vetEdit";
 		}
 		else {
