@@ -28,12 +28,12 @@ INSERT INTO authorities(id,username,authority) VALUES (13,'owner11','owner');
 INSERT INTO users(username,password,enabled) VALUES ('vet1','v3t',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
 
-INSERT INTO vets VALUES (1, 'James', 'Carter');
-INSERT INTO vets VALUES (2, 'Helen', 'Leary');
-INSERT INTO vets VALUES (3, 'Linda', 'Douglas');
-INSERT INTO vets VALUES (4, 'Rafael', 'Ortega');
-INSERT INTO vets VALUES (5, 'Henry', 'Stevens');
-INSERT INTO vets VALUES (6, 'Sharon', 'Jenkins');
+INSERT INTO vets(id, first_name, last_name)  VALUES (1, 'James', 'Carter');
+INSERT INTO vets(id, first_name, last_name)  VALUES (2, 'Helen', 'Leary');
+INSERT INTO vets(id, first_name, last_name)  VALUES (3, 'Linda', 'Douglas');
+INSERT INTO vets(id, first_name, last_name)  VALUES (4, 'Rafael', 'Ortega');
+INSERT INTO vets(id, first_name, last_name)  VALUES (5, 'Henry', 'Stevens');
+INSERT INTO vets(id, first_name, last_name) VALUES (6, 'Sharon', 'Jenkins');
 
 INSERT INTO specialties VALUES (1, 'radiologia');
 INSERT INTO specialties VALUES (2, 'cirugia');
@@ -82,3 +82,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (1, 7, '2013-01-01',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
+
+INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (1, '2030-8-13', '2030-8-20', 'Food with proteins', 'STANDARD', '1');
+INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (2, '2030-9-13', '2030-10-20', '', 'VIP', '2');
+INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (3, '2031-8-13', '2031-8-20', 'Food with a lot of vitamines', 'STANDARD', '5');

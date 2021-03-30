@@ -48,8 +48,6 @@ public class ReservationService {
 		for (Reservation r : reservations) {
 			reservationRepository.delete(r);
 		}
-		
-		
 	}
 	
 }

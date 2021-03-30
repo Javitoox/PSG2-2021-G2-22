@@ -17,18 +17,23 @@ package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.VetService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,8 +43,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -66,6 +74,16 @@ public class VetController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
+	@ModelAttribute("specialties")
+	public Collection<Specialty> populatePets() {
+		try {
+			Collection<Specialty> specialties = this.vetService.findSpecialties();
+			return specialties;
+		}catch(Exception e) {
+			return null;
+		}
+	}
+	
 	@GetMapping(value = "/vets/new")
 	public String initCreationForm(Map<String, Object> model) {
 		Vet vet = new Vet();
@@ -75,16 +93,18 @@ public class VetController {
 	}
 
 	@PostMapping(value = "/vets/new")
-	public String processCreationForm(@Valid Vet vet, BindingResult result, Map<String, Object> model,@RequestParam("Specialties") String specialties) {
-		if (result.hasErrors()) {
+	public String processCreationForm(@Valid Vet vet, BindingResult result, Map<String, Object> model) {
+		if (result.hasErrors()|| vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+			if(vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+				FieldError e = new FieldError("vet", "specialty2", "seleccione alguna especialidad");
+				result.addError(e);
+			}
 			return "vets/vetNew";
 		}
 		else {
 			//creating owner, user and authorities
-			List<Specialty> SpecialtiesSelected = this.specialtiesParse(specialties);
-			for(Specialty s : SpecialtiesSelected) {
-				vet.addSpecialty(s);
-			}
+			Set<Specialty> SpecialtiesSelected = this.specialtiesParse(vet.getSpecialty2());
+			vet.setSpecialtiesInternal(SpecialtiesSelected);
 			this.vetService.saveVet(vet);	
 			
 			return "redirect:/vets";
@@ -122,24 +142,26 @@ public class VetController {
 	}
 
 	@PostMapping(value = "/vets/{vetId}/edit")
-	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,
-			@PathVariable("vetId") int vetId, @RequestParam("Specialties") String specialties) {
-		if (result.hasErrors()) {
+	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,@PathVariable("vetId") int vetId) {
+		if (result.hasErrors() || vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+			if(vet.getSpecialty2()==null || vet.getSpecialty2()=="") {
+				FieldError e = new FieldError("vet", "specialty2", "seleccione alguna especialidad");
+				result.addError(e);
+			}
+			vet.setId(vetId);
 			return "vets/vetEdit";
 		}
 		else {
-			List<Specialty> SpecialtiesSelected = this.specialtiesParse(specialties);
-			for(Specialty s : SpecialtiesSelected) {
-				vet.addSpecialty(s);
-			}
+			Set<Specialty> SpecialtiesSelected = this.specialtiesParse(vet.getSpecialty2());
+			vet.setSpecialtiesInternal(SpecialtiesSelected);
 			vet.setId(vetId);
 			this.vetService.saveVet(vet);
 			return "redirect:/vets";
 		}
 	}
 	
-	public List<Specialty> specialtiesParse(String text){
-		List<Specialty> res = new ArrayList<Specialty>();
+	public Set<Specialty> specialtiesParse(String text){
+		Set<Specialty> res = new HashSet<Specialty>();
 		
 		String[] specialties = text.split(",");
 		for(int i=0;i<specialties.length;i++) {

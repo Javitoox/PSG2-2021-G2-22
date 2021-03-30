@@ -59,6 +59,9 @@
             <c:if test="${label=='Special Cares'}">
                 <fmt:message key="label.inputField.specialCares"/>
             </c:if>
+            <c:if test="${label=='Pet'}">
+                <fmt:message key="label.createOrUpdateVisitForm.pet"/>
+            </c:if>
             
              
          </label>

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -51,15 +52,25 @@ public class Vet extends Person {
 			inverseJoinColumns = @JoinColumn(name = "specialty_id"))
 	private Set<Specialty> specialties;
 	
+	@Column(name = "specialty2")
+	private String specialty2;
 
-	protected Set<Specialty> getSpecialtiesInternal() {
+	public String getSpecialty2() {
+		return specialty2;
+	}
+
+	public void setSpecialty2(String specialty2) {
+		this.specialty2 = specialty2;
+	}
+
+	public Set<Specialty> getSpecialtiesInternal() {
 		if (this.specialties == null) {
 			this.specialties = new HashSet<>();
 		}
 		return this.specialties;
 	}
 
-	protected void setSpecialtiesInternal(Set<Specialty> specialties) {
+	public void setSpecialtiesInternal(Set<Specialty> specialties) {
 		this.specialties = specialties;
 	}
 

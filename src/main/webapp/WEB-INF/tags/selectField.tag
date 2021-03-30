@@ -20,6 +20,9 @@
         <c:if test="${label=='Type'}">
                 <fmt:message key="label.inputField.type"/>
             </c:if>
+            <c:if test="${label=='Pet'}">
+                <fmt:message key="label.createOrUpdateVisitForm.pet"/>
+            </c:if>
         </label>
 
         <div class="col-sm-10">
@@ -31,6 +34,7 @@
                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                 <span class="help-inline">${status.errorMessage}</span>
             </c:if>
+            
         </div>
     </div>
 </spring:bind>
