@@ -15,6 +15,11 @@
         </script>
     </jsp:attribute>
     <jsp:body>
+	    <div class="col-sm-offset-11">
+			<a href="<spring:url value="/hotel/myReservations" htmlEscape="true" />">
+			<button class="btn btn-default" type="submit"><fmt:message key="label.reservation.owner"/></button>
+			</a>
+		</div>
 	    <h2><fmt:message key="label.reservation"/></h2>
 	    
 	    <form:form modelAttribute="reservation" class="form-horizontal">
@@ -36,6 +41,7 @@
 	            </div>
 	        </div>
 	    </form:form>
+	   
     </jsp:body>
 	
 </petclinic:layout>

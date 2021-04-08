@@ -134,7 +134,7 @@ class OwnerControllerTests {
 	void testProcessFindFormNoOwnersFound() throws Exception {
 		mockMvc.perform(get("/owners").param("lastName", "Unknown Surname")).andExpect(status().isOk())
 				.andExpect(model().attributeHasFieldErrors("owner", "lastName"))
-				.andExpect(model().attributeHasFieldErrorCode("owner", "lastName", "notFound"))
+				.andExpect(model().attributeHasFieldErrorCode("owner", "lastName", "No encontrado"))
 				.andExpect(view().name("owners/findOwners"));
 	}
 

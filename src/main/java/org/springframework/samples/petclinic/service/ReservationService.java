@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -29,13 +30,25 @@ public class ReservationService {
 	public Collection<Reservation> allReservations() throws DataAccessException{
 		return (Collection<Reservation>) this.reservationRepository.findAll();
 	}
-	@Transactional()
-	public Collection<Reservation> findReservationsByPetId(int petId) {
+	
+	@Transactional(readOnly = true)
+	public Collection<Reservation> myReservations(String username) throws DataAccessException{
+		return this.reservationRepository.findByOwnerUsername(username);
+	}
+	
+	@Transactional
+	public Collection<Reservation> findReservationsByPetId(int petId) throws DataAccessException{
 		return reservationRepository.findByPetId(petId);
 	}
+	
 	@Transactional(readOnly = true)
 	public Optional<Reservation> findReservationById(int id) throws DataAccessException {
 		return reservationRepository.findById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public Boolean findConcurrentReservation(LocalDate start, LocalDate end, Integer petId) throws DataAccessException {
+		return reservationRepository.findConcurrent(start, end, petId) != null ? true : false;
 	}
 
 	@Transactional
