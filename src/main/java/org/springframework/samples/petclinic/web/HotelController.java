@@ -102,14 +102,29 @@ public class HotelController {
 			}
 			return "hotel/reservation";
 		}else {
-			this.reservationService.saveReservation(reservation);
-			return "welcome";
+			Boolean alreadyExists = this.reservationService.findConcurrentReservation(reservation.getStart(), 
+					reservation.getEnd(), reservation.getPet().getId());
+			if(!alreadyExists) {
+				this.reservationService.saveReservation(reservation);
+				return "welcome";
+			}else {
+				FieldError e = new FieldError("reservation", "start", "Ya ha realizado una reserva para dicha mascota con fechas solapadas");
+				result.addError(e);
+				return "hotel/reservation";
+			}
 		}
 	}
 	
 	@GetMapping(value = "/list")
 	public String listReservations(Map<String, Object> model) {
 		model.put("reservations", this.reservationService.allReservations());
+		return "hotel/reservationList";
+	}
+	
+	@GetMapping(value = "/myReservations")
+	public String myReservations(Map<String, Object> model, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		model.put("reservations", this.reservationService.myReservations(userDetails.getUsername()));
 		return "hotel/reservationList";
 	}
 

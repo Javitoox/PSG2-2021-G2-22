@@ -72,6 +72,7 @@ public class HotelControllerTests {
 		owner.addPet(pet);
 		given(this.ownerService.findOwnerByUsername(any())).willReturn(owner);
 		given(this.petService.findPetById(anyInt())).willReturn(pet);
+		given(this.reservationService.findConcurrentReservation(any(), any(), any())).willReturn(false);
 		
 		mockMvc.perform(post("/hotel")
 							.with(csrf())
@@ -82,6 +83,29 @@ public class HotelControllerTests {
 		                    .param("level", "VIP"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("welcome"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testCreateHotelReservationAlreadyExists() throws Exception {
+		Owner owner = new Owner();
+		Pet pet = new Pet();
+		pet.setId(1);
+		owner.addPet(pet);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(owner);
+		given(this.petService.findPetById(anyInt())).willReturn(pet);
+		given(this.reservationService.findConcurrentReservation(any(), any(), any())).willReturn(true);
+		
+		mockMvc.perform(post("/hotel")
+							.with(csrf())
+							.param("start", "2028-08-13")
+							.param("end", "2028-08-15")
+							.param("specialCares", "Food with a lot of proteins")
+							.param("pet", "Leo with identifier:1")
+		                    .param("level", "VIP"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeHasFieldErrors("reservation", "start"))
+				.andExpect(view().name("hotel/reservation"));
 	}
 	
 	@WithMockUser(value = "spring")
