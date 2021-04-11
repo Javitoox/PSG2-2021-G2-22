@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "causas")
+@Table(name = "causa")
 
-public class Cause extends BaseEntity{
+public class Causa extends BaseEntity{
 
 	@Column(name = "name")
 	@NotNull(message = "Campo requerido")
@@ -27,6 +27,8 @@ public class Cause extends BaseEntity{
 	@Column(name="organization")
 	@NotNull(message = "Campo requerido")
 	private String organization;
+	
+	
 	
 	public String getName() {
 		return name;
@@ -52,6 +54,6 @@ public class Cause extends BaseEntity{
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-
+	
 	
 }

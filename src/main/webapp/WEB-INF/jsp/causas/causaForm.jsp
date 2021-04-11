@@ -5,13 +5,12 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<petclinic:layout pageName="causa">
+<petclinic:layout pageName="causas">
 	<jsp:body>
-	    <h2>
-			<fmt:message key="label.causas" />
-		</h2>
+	
+	    <h2><fmt:message key="label.causas" /></h2>
 	    
-	    <form:form modelAttribute="causa" class="form-horizontal">
+	    <form:form modelAttribute="causa" class="form-horizontal" id="add-causa-form">
 	        <div class="form-group has-feedback">
 	       		<petclinic:inputField label="Name" name="name" />
 	            <petclinic:inputField label="Description" name="description" />
@@ -22,7 +21,7 @@
 	            <div class="col-sm-offset-2 col-sm-10">
 	            	<button class="btn btn-default" type="submit">
 							<fmt:message key="label.reservation.send" />
-						</button>
+					</button>
 	            </div>
 	        </div>
 	    
