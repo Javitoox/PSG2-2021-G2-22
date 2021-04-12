@@ -11,12 +11,12 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "adoptions")
 public class Adoption extends BaseEntity{
 	@NotEmpty
-	@Column(name = "originalOwner")
-	private String originalOwner;
+	@Column(name = "owner")
+	private String owner;
 	
-	@NotEmpty
-	@Column(name = "possibleOwner")
-	private String possibleOwner;
+//	@NotEmpty
+//	@Column(name = "possibleOwner")
+//	private String possibleOwner;
 	
 	@NotEmpty
 	@Column(name = "description")
@@ -27,21 +27,23 @@ public class Adoption extends BaseEntity{
 	private Pet pet;
 	
 	
-	public String getOriginalOwner() {
-		return this.originalOwner;
-	}
+
 	
-	public void setOriginalOwner(String originalOwner) {
-		this.originalOwner = originalOwner;
+	public String getOwner() {
+		return owner;
 	}
-	
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
 	public String getPossibleOwner() {
 		return this.description;
 	}
 	
-	public void setPossibleOwner(String possibleOwner) {
-		this.possibleOwner = possibleOwner;
-	}
+//	public void setPossibleOwner(String possibleOwner) {
+//		this.possibleOwner = possibleOwner;
+//	}
 	
 	public String getDescription() {
 		return this.description;
