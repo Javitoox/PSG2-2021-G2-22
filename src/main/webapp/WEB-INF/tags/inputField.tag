@@ -62,7 +62,12 @@
             <c:if test="${label=='Pet'}">
                 <fmt:message key="label.createOrUpdateVisitForm.pet"/>
             </c:if>
-            
+            <c:if test="${label=='Goal'}">
+                <fmt:message key="label.goal"/>
+            </c:if>
+            <c:if test="${label=='Organization'}">
+                <fmt:message key="label.organization"/>
+            </c:if>
              
          </label>
 

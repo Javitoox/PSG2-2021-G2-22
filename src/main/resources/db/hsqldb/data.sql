@@ -86,3 +86,10 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (1, '2030-8-13', '2030-8-20', 'Food with proteins', 'STANDARD', '1');
 INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (2, '2030-9-13', '2030-10-20', '', 'VIP', '2');
 INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (3, '2031-8-13', '2031-8-20', 'Food with a lot of vitamines', 'STANDARD', '5');
+
+
+INSERT INTO causas(id,name,description,organization,goal,owner_id) VALUES (1,'Operacion', 'Operacion de la pierna para un perro cojo', 'Dogs', 155.5,1);
+INSERT INTO causas(id,name,description,organization,goal,owner_id) VALUES (2,'Operacion', 'Operacion de la pierna para un perro cojo', 'Dogs', 155.5,1);
+INSERT INTO causas(id,name,description,organization,goal,owner_id) VALUES (3,'Operacion', 'Operacion de la pierna para un perro cojo', 'Dogs', 155.5,2);
+INSERT INTO causas(id,name,description,organization,goal,owner_id) VALUES (4,'Operacion', 'Operacion de la pierna para un perro cojo', 'Dogs', 155.5,3);
+

@@ -58,6 +58,14 @@
 					</petclinic:menuItem>
 				</sec:authorize>
 				
+				<sec:authorize access="hasAuthority('owner')">
+					<petclinic:menuItem active="${name eq 'causa'}" url="/causas"
+						title="causas">
+						<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+						<span>Causas</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
