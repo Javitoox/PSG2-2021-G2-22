@@ -9,9 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "causas")
-
-public class Causa extends BaseEntity{
+@Table(name = "causes")
+public class Cause extends BaseEntity{
 
 	@Column(name = "name")
 	@NotNull(message = "Campo requerido")
@@ -34,38 +33,44 @@ public class Causa extends BaseEntity{
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
 	
-	
-	
 	public Owner getOwner() {
 		return owner;
 	}
+	
 	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public Double getGoal() {
 		return goal;
 	}
+	
 	public void setGoal(Double goal) {
 		this.goal = goal;
 	}
+	
 	public String getOrganization() {
 		return organization;
 	}
+	
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
-	
 	
 }

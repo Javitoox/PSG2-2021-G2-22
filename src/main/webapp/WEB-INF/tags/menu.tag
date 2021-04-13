@@ -59,10 +59,10 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAuthority('owner')">
-					<petclinic:menuItem active="${name eq 'causa'}" url="/causas"
-						title="causas">
+					<petclinic:menuItem active="${name eq 'causes'}" url="/causes"
+						title="causes">
 						<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-						<span>Causas</span>
+						<span><fmt:message key="label.causes"/></span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				

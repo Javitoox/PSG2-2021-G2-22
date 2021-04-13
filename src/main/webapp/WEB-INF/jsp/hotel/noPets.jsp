@@ -3,7 +3,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<petclinic:layout pageName="noPets">
+<petclinic:layout pageName="hotel">
 
     <h2><fmt:message key="label.noPets"/></h2>
 
