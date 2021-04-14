@@ -15,6 +15,7 @@
             <th><fmt:message key="label.causes.description"/></th>
             <th><fmt:message key="label.causes.organization"/></th>
             <th><fmt:message key="label.causes.goal"/></th>
+            <th><fmt:message key="label.causes.owner"/></th>
 
         </tr>
         </thead>
@@ -33,6 +34,9 @@
                 </td>
                 <td>
                     <c:out value="${cause.goal}"/>
+                </td>
+                <td>
+                    <c:out value="${cause.owner.user.username}"/>
                 </td> 
             </tr>
 		</c:forEach>
