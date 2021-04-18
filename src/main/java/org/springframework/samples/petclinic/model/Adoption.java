@@ -1,11 +1,14 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "adoptions")
@@ -14,23 +17,23 @@ public class Adoption extends BaseEntity{
 	@Column(name = "owner")
 	private String owner;
 	
-//	@NotEmpty
-//	@Column(name = "possibleOwner")
-//	private String possibleOwner;
+	@NotEmpty
+	@Column(name = "possibleOwner")
+	private String possibleOwner;
 	
 	@NotEmpty
 	@Column(name = "description")
 	private String description;
 	
+	@Column(name = "adoptionStateType")
+	private AdoptionStateType adoptionStateType;
+	
 	@ManyToOne
 	@JoinColumn(name = "pet_id")
 	private Pet pet;
 	
-	
-
-	
 	public String getOwner() {
-		return owner;
+		return this.owner;
 	}
 
 	public void setOwner(String owner) {
@@ -38,12 +41,12 @@ public class Adoption extends BaseEntity{
 	}
 
 	public String getPossibleOwner() {
-		return this.description;
+		return this.possibleOwner;
 	}
 	
-//	public void setPossibleOwner(String possibleOwner) {
-//		this.possibleOwner = possibleOwner;
-//	}
+	public void setPossibleOwner(String possibleOwner) {
+		this.possibleOwner = possibleOwner;
+	}
 	
 	public String getDescription() {
 		return this.description;
@@ -51,6 +54,15 @@ public class Adoption extends BaseEntity{
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+	public AdoptionStateType getAdoptionStateType() {
+		return this.adoptionStateType;
+	}
+	
+	public void setAdoptionStateType(AdoptionStateType adoptionStateType) {
+		this.adoptionStateType = adoptionStateType;
 	}
 	
 	public Pet getPet() {
