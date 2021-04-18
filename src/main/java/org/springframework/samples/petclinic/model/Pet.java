@@ -29,11 +29,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 /**
  * Simple business object representing a pet.
@@ -66,6 +69,10 @@ public class Pet extends NamedEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
 	private Set<Adoption> adoptions;
+	
+	@NotNull
+	@Column(name = "in_adoption")
+	private Boolean inAdoption;
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;

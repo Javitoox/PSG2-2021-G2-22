@@ -5,9 +5,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 
 @Entity
@@ -18,19 +19,20 @@ public class Adoption extends BaseEntity{
 	private String owner;
 	
 	@NotEmpty
-	@Column(name = "possibleOwner")
+	@Column(name = "possible_owner")
 	private String possibleOwner;
 	
 	@NotEmpty
 	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "adoptionStateType")
+	@Column(name = "adoption_state_type")
 	private AdoptionStateType adoptionStateType;
 	
 	@ManyToOne
 	@JoinColumn(name = "pet_id")
 	private Pet pet;
+	
 	
 	public String getOwner() {
 		return this.owner;
