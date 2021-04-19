@@ -13,7 +13,7 @@
         <tr style = "background-color: #f1f1f1">
 
             <th><fmt:message key="label.adoptionList.owner"/></th>
-            <th><fmt:message key="label.adoptionList.description"/></th>
+            <th><fmt:message key="label.adoptionList.petType"/></th>
             <th><fmt:message key="label.adoptionList.pet"/></th>
 
           <%--  <th>Actions</th> --%>
@@ -21,18 +21,16 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${adopciones}" var="adopcion">
+        <c:forEach items="${pets}" var="pet">
             <tr>
                 <td>
-                    <c:out value="${adopcion.owner}"/>
+                    <c:out value="${pet.owner.firstName}"/>
+                </td>
+                 <td>
+                    <c:out value="${pet.type}"/>
                 </td>
                 <td>
-                    <c:out value="${adopcion.description}"/>
-                </td>
-                <td>
-
-                    <c:out value="${adopcion.pet.name} con identificador:${adopcion.pet.id}"/>
-
+                    <c:out value="${pet.name} con identificador:${pet.id}"/>
                 </td>
             </tr>
         </c:forEach>

@@ -2,7 +2,9 @@ package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Adoption;
+import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.AdoptionService;
+import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,16 +17,19 @@ public class AdoptionController {
 
 	private final AdoptionService adoptionService;
 	
+	private final PetService petService;
+	
 	@Autowired
-	public AdoptionController(AdoptionService adoptionService) {
+	public AdoptionController(AdoptionService adoptionService, PetService petService) {
 		this.adoptionService = adoptionService;
+		this.petService = petService;
 	}
 	
 	@GetMapping()
 	public String listadoAdopciones(ModelMap modelMap) {
 		String vista = "adoptions/adoptionList";
-		Iterable<Adoption> adopciones = adoptionService.findAll();
-		modelMap.addAttribute("adopciones", adopciones);
+		Iterable<Pet> pets = petService.findPetsInAdoption();
+		modelMap.addAttribute("pets", pets);
 		return vista;
 	}
 }
