@@ -26,7 +26,7 @@ public class CauseService {
 	}
 
 	@Transactional
-	public void save(@Valid Cause Causa) {
+	public void saveCause(@Valid Cause Causa) {
 		causeRepository.save(Causa);
 	}
 

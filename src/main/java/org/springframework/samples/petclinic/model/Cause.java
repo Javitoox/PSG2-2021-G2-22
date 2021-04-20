@@ -29,6 +29,9 @@ public class Cause extends BaseEntity{
 	@NotNull(message = "Campo requerido")
 	private String organization;
 	
+//	@NotNull
+//	private Boolean closed;
+	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
