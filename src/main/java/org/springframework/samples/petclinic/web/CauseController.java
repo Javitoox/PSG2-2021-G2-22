@@ -33,25 +33,36 @@ public class CauseController {
 		return v;
 	}
 
-	@PostMapping(path="/save")
-	public String saveCause(@Valid Cause cause, BindingResult result, ModelMap modelmap) {
-		String v = "causes/listCause";
-		if(result.hasErrors()) {
-			modelmap.addAttribute("cause", cause);
-			return "causes/causeForm";
-		}else {
-			causeService.save(cause);
-			modelmap.addAttribute("message", "Causa guardada correctamente");
-			v = listCauses(modelmap);
-		}
-		return v;
-	}
+//	@PostMapping(path="/save")
+//	public String saveCause(@Valid Cause cause, BindingResult result, ModelMap modelmap) {
+//		String v = "causes/listCause";
+//		if(result.hasErrors()) {
+//			modelmap.addAttribute("cause", cause);
+//			return "causes/causeForm";
+//		}else {
+//			causeService.save(cause);
+//			modelmap.addAttribute("message", "Causa guardada correctamente");
+//			v = listCauses(modelmap);
+//		}
+//		return v;
+//	}
+	
+	@GetMapping("/new")
+    public String addNewCause(ModelMap model) {
+        model.addAttribute("cause",new Cause());
+        return "causes/causeForm";
+    }
 
-	@GetMapping(path="/new")
-	public String createCause(ModelMap modelmap) {
-		String v = "causes/causeForm";
-		modelmap.addAttribute("cause", new Cause());
-		return v;
-	}
+
+	@PostMapping("/new")
+    public String saveNewCausa(@Valid Cause cause, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+        	model.addAttribute("cause", cause);
+        	return "causes/causeForm";
+        } else {
+        	causeService.saveCause(cause);
+        	return listCauses(model);
+        }
+    }
 
 }
