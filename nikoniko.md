@@ -38,14 +38,14 @@ In the retrospective meeting, the team has a discussion about those results.
 | April 8       |          -            |            -            |     :smiley:              |               -                |              -                 |
 | April 9       |   :worried:           |    :neutral_face:       |     :worried:             |             :smiley:           |       :smiley:                 |
 | April 10      |   :smiley:            |    :neutral_face:       |     :smiley:              |             :worried:          |       :neutral_face:           |
-| April 11      |   :smiley:            |                         |         -                 |               -                |                                |
-| April 12      |          -            |                         |     :smiley:              |             :neutral_face:     |                                |
-| April 13      |    :neutral_face:     |                         |     :neutral_face:        |               -                |                                |
-| April 14      |    :neutral_face:     |                         |         -                 |               -                |                                |
-| April 15      |   :worried:           |                         |         -                 |               -                |                                |
-| April 16      |   :worried:           |                         |      :smiley:             |               -                |                                |
-| April 17      |   :smiley:            |                         |         -                 |               -                |                                |
-| April 18      |   :smiley:            |                         |      :smiley:             |              :smiley:          |                                |
+| April 11      |   :smiley:            |                         |         -                 |               -                |       :neutral_face:           |
+| April 12      |          -            |                         |     :smiley:              |             :neutral_face:     |       :smiley:                 |
+| April 13      |    :neutral_face:     |                         |     :neutral_face:        |               -                |             -                  |
+| April 14      |    :neutral_face:     |                         |         -                 |               -                |             -                  |
+| April 15      |   :worried:           |                         |         -                 |               -                |             -                  |
+| April 16      |   :worried:           |                         |      :smiley:             |               -                |       :worried:                |
+| April 17      |   :smiley:            |                         |         -                 |               -                |             -                  |
+| April 18      |   :smiley:            |                         |      :smiley:             |              :smiley:          |       :smiley:                 |
 | April 19      |                       |                         |                           |                                |                                |
 | April 20      |                       |                         |                           |                                |                                |
 | April 21      |                       |                         |                           |                                |                                |
