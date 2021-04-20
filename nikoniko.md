@@ -46,8 +46,8 @@ In the retrospective meeting, the team has a discussion about those results.
 | April 16      |   :worried:           |                         |      :smiley:             |               -                |       :worried:                |
 | April 17      |   :smiley:            |                         |         -                 |               -                |             -                  |
 | April 18      |   :smiley:            |                         |      :smiley:             |              :smiley:          |       :smiley:                 |
-| April 19      |                       |                         |                           |                                |                                |
-| April 20      |                       |                         |                           |                                |                                |
+| April 19      |                       |                         |                           |                                |             -                  |
+| April 20      |                       |                         |                           |                                |       :smiley:                 |
 | April 21      |                       |                         |                           |                                |                                |
 | April 22      |                       |                         |                           |                                |                                |
 | April 23      |                       |                         |                           |                                |                                |
@@ -62,4 +62,4 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 2         |                       |                         |                           |                                |                                |
 | May 3         |                       |                         |                           |                                |                                |
 | May 4         |                       |                         |                           |                                |                                |
-...
+
