@@ -31,13 +31,13 @@
 					<td><c:out value="${pet.name} con identificador:${pet.id}" />
 					</td>
 					<td><c:if test="${possibleOwner!=pet.owner}">
-								<spring:url value="/adoptions/{petId}/applicationForm"
-									var="applicationFormUrl">
-									<spring:param name="petId" value="${pet.id}" />
-								</spring:url>
-								<a href="${fn:escapeXml(applicationFormUrl)}"
-									class="btn btn-default"><fmt:message
-										key="label.adoption.formTitle" /></a>
+							<spring:url value="/adoptions/{petId}/applicationForm"
+								var="applicationFormUrl">
+								<spring:param name="petId" value="${pet.id}" />
+							</spring:url>
+							<a href="${fn:escapeXml(applicationFormUrl)}"
+								class="btn btn-default"><fmt:message
+									key="label.adoption.formTitle" /></a>
 						</c:if></td>
 				</tr>
 			</c:forEach>

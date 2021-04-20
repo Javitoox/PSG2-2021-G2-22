@@ -14,15 +14,12 @@ import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
-import org.springframework.samples.petclinic.util.AdoptionValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,11 +41,6 @@ public class AdoptionController {
 		this.ownerService = ownerService;
 	}
 
-	/*
-	 * @InitBinder("adoption") public void initEventoBinder(WebDataBinder
-	 * dataBinder) { dataBinder.setValidator(new AdoptionValidator()); }
-	 */
-
 	@GetMapping()
 	public String adoptionList(ModelMap modelMap, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -57,8 +49,8 @@ public class AdoptionController {
 
 		String view = "adoptions/adoptionList";
 		Iterable<Pet> pets = petService.findPetsInAdoption();
+		
 		modelMap.addAttribute("pets", pets);
-
 		return view;
 	}
 
@@ -66,17 +58,17 @@ public class AdoptionController {
 	public String initApplyForm(Map<String, Object> model, Authentication authentication,
 			@PathVariable("petId") int petId) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
 		Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 
 		if (possibleOwner == null) {
 			return "redirect:/login";
+			
 		} else {
 
-			String possibleOwnerName = possibleOwner.getFirstName() + " " + possibleOwner.getLastName();
+			String possibleOwnerName = possibleOwner.getUser().getUsername();
 
 			Owner owner = this.petService.findPetById(petId).getOwner();
-			String ownerName = owner.getFirstName() + " " + owner.getLastName();
+			String ownerName = owner.getUser().getUsername();
 
 		
 			model.put("possibleOwner", possibleOwnerName);
@@ -90,29 +82,35 @@ public class AdoptionController {
 	public String sendApplicationForm(@PathVariable("petId") int petId,@Valid Adoption adoption, BindingResult result, 
 			Map<String, Object> model, Authentication authentication) throws DataAccessException, DuplicatedPetNameException {
 		Pet pet = this.petService.findPetById(petId);
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 		if (result.hasErrors()) {
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-			Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-			String possibleOwnerName = possibleOwner.getFirstName() + " " + possibleOwner.getLastName();
+			String possibleOwnerName = possibleOwner.getUser().getUsername();
 
 			Owner owner = this.petService.findPetById(petId).getOwner();
-			String ownerName = owner.getFirstName() + " " + owner.getLastName();
+			String ownerName = owner.getUser().getUsername();
 			
 			model.put("possibleOwner", possibleOwnerName);
 			model.put("originalOwner", ownerName);
 			
 			return "/adoptions/applicationForm";
 		} else {
-			adoption.setPet(pet);
-			adoption.setAdoptionStateType(AdoptionStateType.PENDING);
-			pet.addAdoption(adoption);
+			Adoption alreadyExists = adoptionService.findAdoptionByPossibleOwnerAndPet(possibleOwner.getUser().getUsername()
+					, petService.findPetById(petId));
+			if(alreadyExists!=null){
+				return "/adoptions/existingAdoption";
+			}else {
+				adoption.setPet(pet);
+				adoption.setAdoptionStateType(AdoptionStateType.PENDING);
+				pet.addAdoption(adoption);
 
-			this.adoptionService.saveAdoption(adoption);
-			this.petService.savePet(pet);
+				this.adoptionService.saveAdoption(adoption);
+				this.petService.savePet(pet);
 
-			model.put("adoption",adoption);
-			return "welcome";
+				model.put("adoption",adoption);
+				return "welcome";	
+				}
 		}
 	}
 }
