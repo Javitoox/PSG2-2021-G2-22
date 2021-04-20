@@ -46,8 +46,8 @@ In the retrospective meeting, the team has a discussion about those results.
 | April 16      |   :worried:           |                         |      :smiley:             |               -                |       :worried:                |
 | April 17      |   :smiley:            |                         |         -                 |               -                |             -                  |
 | April 18      |   :smiley:            |                         |      :smiley:             |              :smiley:          |       :smiley:                 |
-| April 19      |                       |                         |                           |                                |             -                  |
-| April 20      |                       |                         |                           |                                |       :smiley:                 |
+| April 19      |   :smiley:            |                         |                           |                                |             -                  |
+| April 20      |    :neutral_face:     |                         |                           |                                |       :smiley:                 |
 | April 21      |                       |                         |                           |                                |                                |
 | April 22      |                       |                         |                           |                                |                                |
 | April 23      |                       |                         |                           |                                |                                |
