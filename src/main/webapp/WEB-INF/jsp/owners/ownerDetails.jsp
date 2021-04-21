@@ -114,7 +114,14 @@
                         			<spring:param name="petId" value="${pet.id}"/>
                     			</spring:url>
                     			<a href="${fn:escapeXml(deletePetUrl)}" class="btn btn-default"><fmt:message key="label.ownersDetails.deletePet"/></a>
-                </td>
+                			</td>
+                			<td>
+                				<spring:url value="/owners/{ownerId}/pets/{petId}/inAdoption" var="inAdoptionPetUrl">
+                					<spring:param name="ownerId" value="${owner.id}"/>
+                        			<spring:param name="petId" value="${pet.id}"/>
+                    			</spring:url>
+                    			<a href="${fn:escapeXml(inAdoptionPetUrl)}" class="btn btn-default"><fmt:message key="label.ownersDetails.inAdoptionPet"/></a>
+                			</td>
                         </tr>
                     </table>
                 </td>
