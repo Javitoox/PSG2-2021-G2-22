@@ -26,6 +26,9 @@ public class Cause extends BaseEntity{
 	@Positive(message = "El objetivo debe ser mayor de 0")
 	private Double goal;
 	
+	@Column(name="donations")
+	private Double donations;
+	
 	@Column(name="organization")
 	@NotEmpty
 	private String organization;
@@ -67,6 +70,14 @@ public class Cause extends BaseEntity{
 	
 	public void setGoal(Double goal) {
 		this.goal = goal;
+	}
+	
+	public Double getDonations() {
+		return donations;
+	}
+	
+	public void setDonations(Double donations) {
+		this.donations = donations;
 	}
 	
 	public String getOrganization() {
