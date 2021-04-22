@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +31,8 @@ public class CauseController {
 		String v = "causes/listCause";
 		Collection<Cause> causes = this.causeService.findAll();
 		model.addAttribute("causes", causes);
+		model.addAttribute("result", "¡Bienvenid@ a las causas disponibles en nuestra web!");
+		model.addAttribute("cause", new Cause());
 		return v;
 	}
 
@@ -52,7 +55,26 @@ public class CauseController {
         model.addAttribute("cause",new Cause());
         return "causes/causeForm";
     }
-
+	
+	@PostMapping("/donate/{id}")
+    public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, ModelMap model) {
+		if(cause.getDonations() == null || result.hasFieldErrors("donations")) {
+			model.addAttribute("result", "Debe insertar un valor númerico");
+		}else {
+			Cause originalCause = this.causeService.findCausseById(id).orElse(null);
+			Double total = originalCause.getDonations() + cause.getDonations();
+			if(total > originalCause.getGoal()) {
+				model.addAttribute("result", "Debe insertar un valor cuya suma a las donaciones no supere el objetivo de la causa");
+			}else {
+				originalCause.setDonations(total);
+				this.causeService.saveCause(originalCause);
+				model.addAttribute("result", "Donación realizada correctamente");
+			}
+		}
+		Collection<Cause> causes = this.causeService.findAll();
+		model.addAttribute("causes", causes);
+		return "causes/listCause";
+    }
 
 	@PostMapping("/new")
     public String saveNewCausa(@Valid Cause cause, BindingResult result, ModelMap model) {

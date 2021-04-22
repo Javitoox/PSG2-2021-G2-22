@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <petclinic:layout pageName="causes">
+	<div class="alert alert-warning alert-dismissable">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  ${result}
+	</div>
     <h2><fmt:message key="label.causes"/></h2>
 
     <table id="causesTable" class="table table-striped">
@@ -16,19 +20,12 @@
             <th><fmt:message key="label.causes.name"/></th>
             <th><fmt:message key="label.causes.goal"/></th>
             <th><fmt:message key="label.causes.donations"/></th>
-            <th>
-                <div id="donation-state">
-            		<fmt:message key="label.causes.state"/>
-            	</div>
-            	<div id="donation-donate">
-            		<fmt:message key="label.causes.donate"/>
-            	</div>
-            </th>
+            <th><fmt:message key="label.causes.state"/></th>
 
         </tr>
         </thead>
 
-        <tbody>
+        <tbody>	
         <c:forEach items="${causes}" var="cause">
             <tr>
                 <td>
@@ -43,17 +40,26 @@
                 <td>
                     <jstl:if test="${cause.donations < cause.goal}">
 						<button id="button-${cause.id}" type="button" class="btn btn-success" onclick="display_amount(this)">
-						<fmt:message key="label.causes.donate-act"/></button>
-						<form class="form-amount" id="form-${cause.id}" action="/" method="get">
-						    <input type="text" id="amount" name="amount"/>
-						    <button type="submit" class="btn btn-default"><fmt:message key="label.causes.send"/></button>
-					    </form>
-					    <div>
-					    	<a class="glyphicon glyphicon-remove-circle close-amount" id="close-${cause.id}" onclick="close_amount()"></a>
-					    </div>
+							<fmt:message key="label.causes.donate-act"/>
+						</button>
+						<form:form action="/causes/donate/${cause.id}" modelAttribute="cause" class="form-amount" id="form-${cause.id}">
+							<div class="form-group has-feedback">
+					       		<petclinic:simpleInput name="donations" />
+					       	</div>
+					        <div class="form-group">
+					            <div class="col-sm-offset-2 col-sm-2">
+					            	<button class="btn btn-default" type="submit">
+											<fmt:message key="label.causes.send"/>
+									</button>
+					            </div>
+					        </div>
+						</form:form>
+						<a class="glyphicon glyphicon-remove-circle close-amount col-sm-offset-11" id="close-${cause.id}" onclick="close_amount(this)"></a>
 					</jstl:if>
 					<jstl:if test="${cause.donations >= cause.goal}">
-						<button type="button" class="btn btn-danger"><fmt:message key="label.causes.closed"/></button>
+						<button type="button" class="btn btn-danger">
+							<fmt:message key="label.causes.closed"/>
+						</button>
 					</jstl:if>
                 </td>
             </tr>
