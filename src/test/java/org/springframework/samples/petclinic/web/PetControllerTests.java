@@ -149,5 +149,11 @@ class PetControllerTests {
 				.andExpect(model().attributeHasErrors("pet")).andExpect(status().isOk())
 				.andExpect(view().name("pets/createOrUpdatePetForm"));
 	}
-
+    @WithMockUser(value = "spring")
+   	@Test
+   	void testInAdoption() throws Exception {
+   		mockMvc.perform(post("/owners/{ownerId}/pets/{petId}/inAdoption" ,8, 10)
+   							.with(csrf()))
+   				.andExpect(status().is2xxSuccessful());
+   	}
 }

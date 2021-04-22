@@ -181,7 +181,7 @@ public class PetController {
 			} catch (DataAccessException | DuplicatedPetNameException e) {
 				e.printStackTrace();
 			}			
-			return "redirect:/owners/{ownerId}";
+			return "redirect:/adoptions";
 		} else {
 			throw new IllegalArgumentException("Pet already in adoption");
 		}
