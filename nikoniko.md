@@ -34,22 +34,22 @@ In the retrospective meeting, the team has a discussion about those results.
 
 | Date          | Carmen Mª Muñoz Pérez | Enrique Salazar Márquez | Javier Martínez Fernández | José Carlos Morales Borreguero | Rafael Ángel Jiménez Fernández |
 | ------------- | --------------------- | ----------------------- | ------------------------- | ------------------------------ | ------------------------------ |
-| April 7       |   :smiley:            |    :smiley:             |     :neutral_face:        |             :smiley:           |       :neutral_face:           |
-| April 8       |          -            |            -            |     :smiley:              |               -                |              -                 |
-| April 9       |   :worried:           |    :neutral_face:       |     :worried:             |             :smiley:           |       :smiley:                 |
-| April 10      |   :smiley:            |    :neutral_face:       |     :smiley:              |             :worried:          |       :neutral_face:           |
-| April 11      |   :smiley:            |                         |         -                 |               -                |       :neutral_face:           |
-| April 12      |          -            |                         |     :smiley:              |             :neutral_face:     |       :smiley:                 |
-| April 13      |    :neutral_face:     |                         |     :neutral_face:        |               -                |             -                  |
-| April 14      |    :neutral_face:     |                         |         -                 |               -                |             -                  |
-| April 15      |   :worried:           |                         |         -                 |               -                |             -                  |
-| April 16      |   :worried:           |                         |      :smiley:             |               -                |       :worried:                |
-| April 17      |   :smiley:            |                         |         -                 |               -                |             -                  |
-| April 18      |   :smiley:            |                         |      :smiley:             |              :smiley:          |       :smiley:                 |
-| April 19      |   :smiley:            |                         |         -                 |                                |             -                  |
-| April 20      |    :neutral_face:     |                         |      :smiley:             |                                |       :smiley:                 |
-| April 21      |                       |                         |      :neutral_face:       |                                |       :worried:                |
-| April 22      |                       |                         |                           |                                |                                |
+| April 7       |   :smiley:            |       :smiley:          |     :neutral_face:        |             :smiley:           |       :neutral_face:           |
+| April 8       |          -            |           -             |     :smiley:              |               -                |              -                 |
+| April 9       |   :worried:           |     :neutral_face:      |     :worried:             |             :smiley:           |       :smiley:                 |
+| April 10      |   :smiley:            |     :neutral_face:      |     :smiley:              |             :worried:          |       :neutral_face:           |
+| April 11      |   :smiley:            |           -             |         -                 |               -                |       :neutral_face:           |
+| April 12      |          -            |           -             |     :smiley:              |             :neutral_face:     |       :smiley:                 |
+| April 13      |    :neutral_face:     |           -             |     :neutral_face:        |               -                |             -                  |
+| April 14      |    :neutral_face:     |           -             |         -                 |               -                |             -                  |
+| April 15      |   :worried:           |           -             |         -                 |               -                |             -                  |
+| April 16      |   :worried:           |     :neutral_face:      |      :smiley:             |               -                |       :worried:                |
+| April 17      |   :smiley:            |           -             |         -                 |               -                |             -                  |
+| April 18      |   :smiley:            |        :smiley:         |      :smiley:             |              :smiley:          |       :smiley:                 |
+| April 19      |   :smiley:            |           -             |         -                 |                                |             -                  |
+| April 20      |    :neutral_face:     |        :smiley:         |      :smiley:             |                                |       :smiley:                 |
+| April 21      |                       |        :smiley:         |      :neutral_face:       |                                |       :worried:                |
+| April 22      |                       |        :smiley:         |                           |                                |                                |
 | April 23      |                       |                         |                           |                                |                                |
 | April 24      |                       |                         |                           |                                |                                |
 | April 25      |                       |                         |                           |                                |                                |
