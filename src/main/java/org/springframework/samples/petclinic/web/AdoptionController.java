@@ -54,7 +54,7 @@ public class AdoptionController {
 		return view;
 	}
 
-	@RequestMapping(value = "/{petId}/applicationForm")
+	@GetMapping(value = "/{petId}/applicationForm")
 	public String initApplyForm(Map<String, Object> model, Authentication authentication,
 			@PathVariable("petId") int petId) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
