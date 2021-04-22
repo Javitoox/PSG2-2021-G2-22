@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -13,11 +14,11 @@ import javax.validation.constraints.Positive;
 public class Cause extends BaseEntity{
 
 	@Column(name = "name")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String name;
 	
 	@Column(name="description")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String description;
 	
 	@Column(name="goal")
@@ -26,8 +27,11 @@ public class Cause extends BaseEntity{
 	private Double goal;
 	
 	@Column(name="organization")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String organization;
+	
+//	@NotNull
+//	private Boolean closed;
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
