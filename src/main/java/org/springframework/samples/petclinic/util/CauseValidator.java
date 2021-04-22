@@ -15,9 +15,9 @@ public class CauseValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
-		Cause cause= (Cause) target;
-
+		Cause cause = (Cause) target;
 		Double goal = cause.getGoal();
+		
 		
 		
 		if (goal <= 0) {
@@ -28,6 +28,10 @@ public class CauseValidator implements Validator{
 		if(goal > 20000) {
 			errors.rejectValue("goal", "El objetivo marcado no puede ser mayor a 20000",
 					"El objetivo marcado no puede ser mayor a 20000");
+		}
+		if(String.class.isInstance(goal)) {
+			errors.rejectValue("goal", "El objetivo marcado no puede contener caracteres del alfabeto",
+					"El objetivo marcado no puede contener caracteres del alfabeto");
 		}
 		
 	
