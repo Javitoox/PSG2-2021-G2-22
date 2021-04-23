@@ -82,6 +82,7 @@ public class CauseController {
         	model.addAttribute("cause", cause);
         	return "causes/causeForm";
         } else {
+        	cause.setDonations(0.);
         	causeService.saveCause(cause);
         	return listCauses(model);
         }
