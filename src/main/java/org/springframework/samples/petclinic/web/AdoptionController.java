@@ -48,7 +48,7 @@ public class AdoptionController {
 		modelMap.addAttribute("possibleOwner", possibleOwner);
 
 		String view = "adoptions/adoptionList";
-		Iterable<Pet> pets = petService.findPetsInAdoption();
+		Iterable<Pet> pets = this.petService.findPetsInAdoption();
 		
 		modelMap.addAttribute("pets", pets);
 		return view;

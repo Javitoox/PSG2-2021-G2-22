@@ -9,6 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -47,6 +50,19 @@ public class AdoptionControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
+	void testGetAdoptionList() throws Exception {
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
+		given(this.petService.findPetsInAdoption()).willReturn(new ArrayList<Pet>());
+
+		mockMvc.perform(get("/adoptions"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("possibleOwner"))
+			.andExpect(model().attributeExists("pets"))
+			.andExpect(view().name("adoptions/adoptionList"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
 	void testInitApplyForm() throws Exception {
 		Owner owner = new Owner();
 		owner.setId(TEST_OWNER_ID);
@@ -54,7 +70,7 @@ public class AdoptionControllerTests {
 		Pet pet = new Pet();
 		pet.setId(TEST_PET_ID);
 
-		given(this.ownerService.findOwnerByUsername(any())).willReturn(owner);
+		given(this.ownerService.findOwnerByUsername("spring")).willReturn(owner);
 		given(this.petService.findPetById(TEST_PET_ID)).willReturn(pet);
 
 		mockMvc.perform(get("/adoptions/{petId}/applicationForm", TEST_PET_ID))
@@ -68,11 +84,7 @@ public class AdoptionControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitCreationNoRegisteredOwner() throws Exception {
-		Pet pet = new Pet();
-		pet.setId(TEST_PET_ID);
-
 		given(this.ownerService.findOwnerByUsername(any())).willReturn(null);
-		given(this.petService.findPetById(TEST_PET_ID)).willReturn(pet);
 
 		mockMvc.perform(get("/adoptions/{petId}/applicationForm", TEST_PET_ID)).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/login"));
