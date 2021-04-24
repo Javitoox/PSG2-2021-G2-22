@@ -42,14 +42,11 @@ public class CauseController {
 		return v;
 	}
 	
-	@GetMapping
-	public String listCausesDetails(ModelMap model) {
-		String v = "causes/listCauseDetails";
-		Collection<Cause> causes = this.causeService.findAll();
-		model.addAttribute("causes", causes);
-		return v;
+	@GetMapping("/{causaId}/details")
+	public String causeDetails(ModelMap model, @PathVariable("causeId") int causeId) {
+		model.addAttribute("cause", causeService.findCauseById(causeId));
+		return "/causes/listCauseDetails";
 	}
-
 
 	
 	@GetMapping("/new")

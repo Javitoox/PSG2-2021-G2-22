@@ -36,7 +36,7 @@ public class CauseService {
 		return (Collection<Cause>) this.causeRepository.findAll();
 	}
 	@Transactional(readOnly = true)
-	public Optional<Cause> findCausseById(int id) throws DataAccessException {
+	public Optional<Cause> findCauseById(int id) throws DataAccessException {
 		return causeRepository.findById(id);
 	}
 	
