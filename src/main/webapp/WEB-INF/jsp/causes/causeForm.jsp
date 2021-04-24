@@ -11,11 +11,16 @@
 	    <h2><fmt:message key="label.causes.new" /></h2>
 	    
 	    <form:form modelAttribute="cause" class="form-horizontal" id="add-cause-form">
+	   
 	        <div class="form-group has-feedback">
 	       		<petclinic:inputField label="Name" name="name" />
 	            <petclinic:inputField label="Description" name="description" />
-	            <petclinic:inputField label="Goal" name="goal" />
+	            <petclinic:inputField label="Goal" name="goal"/>
 	            <petclinic:inputField label="Organization" name="organization" />
+	            <input type=hidden name="owner" value="${owner}" />
+	           
+	            
+	            
             </div>
 	        <div class="form-group">
 	            <div class="col-sm-offset-2 col-sm-10">
