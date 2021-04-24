@@ -88,7 +88,7 @@ public class AdoptionController {
 		if (result.hasErrors()) {
 			String possibleOwnerName = possibleOwner.getUser().getUsername();
 
-			Owner owner = this.petService.findPetById(petId).getOwner();
+			Owner owner = pet.getOwner();
 			String ownerName = owner.getUser().getUsername();
 			
 			model.put("possibleOwner", possibleOwnerName);
@@ -97,7 +97,7 @@ public class AdoptionController {
 			return "/adoptions/applicationForm";
 		} else {
 			Adoption alreadyExists = adoptionService.findAdoptionByPossibleOwnerAndPet(possibleOwner.getUser().getUsername()
-					, petService.findPetById(petId));
+					, pet);
 			if(alreadyExists!=null){
 				return "/adoptions/existingAdoption";
 			}else {
