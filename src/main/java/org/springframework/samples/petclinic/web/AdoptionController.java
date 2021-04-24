@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Adoption;
 import org.springframework.samples.petclinic.model.AdoptionStateType;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetService;
@@ -17,6 +18,7 @@ import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNam
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +43,7 @@ public class AdoptionController {
 		this.ownerService = ownerService;
 	}
 
-	@GetMapping()
+	@GetMapping
 	public String adoptionList(ModelMap modelMap, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
@@ -52,6 +54,13 @@ public class AdoptionController {
 		
 		modelMap.addAttribute("pets", pets);
 		return view;
+	}
+	
+	@RequestMapping(value="/pendingAdoptionsList")
+	public String pendingAdoptionList(ModelMap modelMap) {
+		modelMap.addAttribute("pendingAdoption", AdoptionStateType.PENDING);
+		modelMap.addAttribute("adoptions", this.adoptionService.findAll());
+		return "adoptions/stateAdoptionList";
 	}
 
 	@GetMapping(value = "/{petId}/applicationForm")
@@ -112,5 +121,18 @@ public class AdoptionController {
 				return "welcome";	
 				}
 		}
+	}
+	
+	
+	@PostMapping(value="/{petId}/accept")
+	public String acceptAdoptionApplication(@PathVariable("petId") int petId,@Valid Adoption adoption, 
+			Map<String, Object> model) throws DataAccessException {
+		
+		adoption.setAdoptionStateType(AdoptionStateType.ACCEPTED);
+		this.adoptionService.saveAdoption(adoption);
+		model.put("pendingAdoption", AdoptionStateType.PENDING);
+
+		return "adoptions/stateAdoptionList";
+		
 	}
 }
