@@ -1,12 +1,11 @@
 package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 
@@ -22,7 +21,7 @@ public class Adoption extends BaseEntity{
 	@Column(name = "possible_owner")
 	private String possibleOwner;
 	
-	@NotEmpty
+	@NotBlank(message = "Campo requerido")
 	@Column(name = "description")
 	private String description;
 	
