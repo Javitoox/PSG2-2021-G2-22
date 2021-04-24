@@ -41,6 +41,14 @@ public class CauseController {
 		model.addAttribute("causes", causes);
 		return v;
 	}
+	
+	@GetMapping
+	public String listCausesDetails(ModelMap model) {
+		String v = "causes/listCauseDetails";
+		Collection<Cause> causes = this.causeService.findAll();
+		model.addAttribute("causes", causes);
+		return v;
+	}
 
 
 	
