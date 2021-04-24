@@ -59,7 +59,7 @@ public class CauseControllerTests {
 		cause.setDonations(0.);
 		cause.setGoal(100.);
 		Optional<Cause> optional = Optional.of(cause);
-		given(this.causeService.findCausseById(1)).willReturn(optional);
+		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
 		
 		mockMvc.perform(post("/causes/donate/1")
@@ -81,7 +81,7 @@ public class CauseControllerTests {
 		cause.setDonations(0.);
 		cause.setGoal(100.);
 		Optional<Cause> optional = Optional.of(cause);
-		given(this.causeService.findCausseById(1)).willReturn(optional);
+		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
 		
 		mockMvc.perform(post("/causes/donate/1")
@@ -103,7 +103,7 @@ public class CauseControllerTests {
 		cause.setDonations(0.);
 		cause.setGoal(100.);
 		Optional<Cause> optional = Optional.of(cause);
-		given(this.causeService.findCausseById(1)).willReturn(optional);
+		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
 		
 		mockMvc.perform(post("/causes/donate/1")

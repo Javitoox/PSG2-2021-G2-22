@@ -5,6 +5,8 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <petclinic:layout pageName="causes">
 	<div class="alert alert-warning alert-dismissable">
@@ -29,7 +31,10 @@
         <c:forEach items="${causes}" var="cause">
             <tr>
                 <td>
-                    <c:out value="${cause.name}"/>
+                    <spring:url value="/causes/{causeId}" var="causeUrl">
+                        <spring:param name="causeId" value="${cause.id}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(causeUrl)}"><c:out value="${cause.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${cause.goal}"/>

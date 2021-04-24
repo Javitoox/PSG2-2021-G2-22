@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -15,10 +16,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping( value = "/causes")
@@ -44,12 +45,13 @@ public class CauseController {
 		return v;
 	}
 	
-	@GetMapping("/{causaId}/details")
-	public String causeDetails(ModelMap model, @PathVariable("causeId") int causeId) {
-		model.addAttribute("cause", causeService.findCauseById(causeId));
-		return "/causes/listCauseDetails";
+	@GetMapping("/causes/{causeId}")
+	public ModelAndView showCause(@PathVariable("causeId") int causeId) {
+		ModelAndView mav = new ModelAndView("causes/listCauseDetails");
+		mav.addObject(this.causeService.findCauseById(causeId));
+		return mav;
 	}
-
+	
 	
 	@GetMapping("/new")
     public String addNewCause(ModelMap model,Authentication authentication) {
@@ -71,7 +73,7 @@ public class CauseController {
 		if(cause.getDonations() == null || result.hasFieldErrors("donations")) {
 			model.addAttribute("result", "Debe insertar un valor númerico");
 		}else {
-			Cause originalCause = this.causeService.findCausseById(id).orElse(null);
+			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
 			Double total = originalCause.getDonations() + cause.getDonations();
 			if(total > originalCause.getGoal()) {
 				model.addAttribute("result", "Debe insertar un valor cuya suma a las donaciones no supere el objetivo de la causa");
