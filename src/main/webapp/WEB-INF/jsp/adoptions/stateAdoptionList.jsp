@@ -6,6 +6,11 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="adoptions">
+	<div class="col-sm-offset-11">
+			<a href="<spring:url value="/adoptions/allAdoptionsList" htmlEscape="true" />">
+			<button class="btn btn-default" type="submit"><fmt:message key="label.adoptionList.allAdoptions"/></button>
+			</a>
+	</div>
     <h2><fmt:message key="label.adoption"/></h2>
 
     <table id="adoptionsTable" class="table table-striped">
@@ -42,15 +47,15 @@
                     <c:out value="${adoption.adoptionStateType}"/>
                 </td>
                 <td><c:if test="${pendingAdoption==adoption.adoptionStateType}">
-                <spring:url value="/adoptions/{petId}/accept" var="acceptAdoptionApplication">
-                	<spring:param name="petId" value="${adoption.pet.id}"/>
+                <spring:url value="/adoptions/deny/${adoption.id}" var="denyAdoptionApplication">
                 </spring:url>
-                <a href="${fn:escapeXml(acceptAdoptionApplication)}" class="glyphicon glyphicon-remove-circle"></a>
+                <a href="${fn:escapeXml(denyAdoptionApplication)}" class="glyphicon glyphicon-remove-circle"></a>
                 
-                <spring:url value="/adoptions/{petId}/accept" var="acceptAdoptionApplication">
-                	<spring:param name="petId" value="${adoption.pet.id}"/>
+                <spring:url value="/adoptions/accept/${adoption.id}" var="acceptAdoptionApplication">
                 </spring:url>
                 <a href="${fn:escapeXml(acceptAdoptionApplication)}" class="glyphicon glyphicon-ok-circle"></a>
+                
+                
                 </c:if></td>
             </tr>
         </c:forEach>
