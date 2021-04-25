@@ -50,9 +50,9 @@ In the retrospective meeting, the team has a discussion about those results.
 | April 20      |    :neutral_face:     |        :smiley:         |      :smiley:             |                                |       :smiley:                 |
 | April 21      |          -            |       :smiley:          |      :neutral_face:       |                                |       :worried:                |
 | April 22      |          -            |        :smiley:         |      :worried:            |                                |       :smiley:                 |
-| April 23      |                       |                         |      :neutral_face:       |                                |                                |
-| April 24      |                       |                         |         -                 |                                |                                |
-| April 25      |                       |                         |       :smiley:            |                                |                                |
+| April 23      |    :neutral_face:     |                         |      :neutral_face:       |                                |                                |
+| April 24      |    :neutral_face:     |                        |         -                 |                                |                                |
+| April 25      |   :smiley:            |                         |       :smiley:            |                                |                                |
 | April 26      |                       |                         |                           |                                |                                |
 | April 27      |                       |                         |                           |                                |                                |
 | April 28      |                       |                         |                           |                                |                                |
