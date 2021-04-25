@@ -95,7 +95,7 @@ public class CauseControllerTests {
 							.with(csrf())
 							.param("donations", "dddd"))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("result", "Debe insertar un valor númerico"))
+				.andExpect(model().attribute("result", "Debe insertar un valor númerico positivo"))
 				.andExpect(model().attributeExists("causes"))
 				.andExpect(view().name("causes/listCause"));
 		

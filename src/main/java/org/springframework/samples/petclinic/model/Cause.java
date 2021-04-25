@@ -33,6 +33,7 @@ public class Cause extends BaseEntity{
 	private Double goal;
 	
 	@Column(name="donations")
+	@Positive
 	private Double donations;
 	
 	@Column(name="organization")

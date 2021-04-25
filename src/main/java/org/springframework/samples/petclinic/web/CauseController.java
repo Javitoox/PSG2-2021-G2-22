@@ -74,7 +74,7 @@ public class CauseController {
 	@PostMapping("/donate/{id}")
     public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, Authentication authentication, ModelMap model) {
 		if(cause.getDonations() == null || result.hasFieldErrors("donations")) {
-			model.addAttribute("result", "Debe insertar un valor númerico");
+			model.addAttribute("result", "Debe insertar un valor númerico positivo");
 		}else {
 			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
 			Double total = originalCause.getDonations() + cause.getDonations();
