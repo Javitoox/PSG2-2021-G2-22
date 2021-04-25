@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cause;
-
+import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.repository.CauseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,7 @@ public class CauseService {
 	}
 
 	@Transactional
-	public void saveCause(@Valid Cause Causa) {
+	public void saveCause(@Valid Cause Causa)  throws DataAccessException {
 		causeRepository.save(Causa);
 	}
 	@Transactional(readOnly = true)
@@ -40,5 +40,11 @@ public class CauseService {
 		return causeRepository.findById(id);
 	}
 	
+	@Transactional
+	public void updateDonationsCause(Cause cause, Double total, Donation donation)  throws DataAccessException{
+		cause.setDonations(total);
+		cause.addDonation(donation);
+		this.causeRepository.save(cause);
+	}
 
 }

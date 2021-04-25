@@ -22,7 +22,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.CauseService;
+import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,6 +36,9 @@ public class CauseControllerTests {
 	
 	@MockBean
 	private CauseService causeService;
+	
+	@MockBean
+	private OwnerService ownerService;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -61,6 +66,7 @@ public class CauseControllerTests {
 		Optional<Cause> optional = Optional.of(cause);
 		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
 		
 		mockMvc.perform(post("/causes/donate/1")
 							.with(csrf())
@@ -70,7 +76,7 @@ public class CauseControllerTests {
 				.andExpect(model().attributeExists("causes"))
 				.andExpect(view().name("causes/listCause"));
 		
-		verify(causeService, times(1)).saveCause(any());
+		verify(causeService, times(1)).updateDonationsCause(any(), any(), any());
 	}
 	
 	@WithMockUser(value = "spring")
@@ -83,6 +89,7 @@ public class CauseControllerTests {
 		Optional<Cause> optional = Optional.of(cause);
 		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
 		
 		mockMvc.perform(post("/causes/donate/1")
 							.with(csrf())
@@ -92,7 +99,7 @@ public class CauseControllerTests {
 				.andExpect(model().attributeExists("causes"))
 				.andExpect(view().name("causes/listCause"));
 		
-		verify(causeService, times(0)).saveCause(any());
+		verify(causeService, times(0)).updateDonationsCause(any(), any(), any());
 	}
 	
 	@WithMockUser(value = "spring")
@@ -105,6 +112,7 @@ public class CauseControllerTests {
 		Optional<Cause> optional = Optional.of(cause);
 		given(this.causeService.findCauseById(1)).willReturn(optional);
 		given(this.causeService.findAll()).willReturn(new ArrayList<>());
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
 		
 		mockMvc.perform(post("/causes/donate/1")
 							.with(csrf())
@@ -114,7 +122,7 @@ public class CauseControllerTests {
 				.andExpect(model().attributeExists("causes"))
 				.andExpect(view().name("causes/listCause"));
 		
-		verify(causeService, times(0)).saveCause(any());
+		verify(causeService, times(0)).updateDonationsCause(any(), any(), any());
 	}
 	
 }
