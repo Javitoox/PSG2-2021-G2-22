@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 
 
 @Entity
@@ -22,6 +24,7 @@ public class Adoption extends BaseEntity{
 	private String possibleOwner;
 	
 	@NotBlank(message = "Campo requerido")
+	@Length(min=0,max=150,message = "No puede exceder un máximo de 150 caracteres")
 	@Column(name = "description")
 	private String description;
 	
