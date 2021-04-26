@@ -1,10 +1,17 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -13,11 +20,11 @@ import javax.validation.constraints.Positive;
 public class Cause extends BaseEntity{
 
 	@Column(name = "name")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String name;
 	
 	@Column(name="description")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String description;
 	
 	@Column(name="goal")
@@ -25,13 +32,38 @@ public class Cause extends BaseEntity{
 	@Positive(message = "El objetivo debe ser mayor de 0")
 	private Double goal;
 	
+	@Column(name="donations")
+	@Positive
+	private Double donations;
+	
 	@Column(name="organization")
-	@NotNull(message = "Campo requerido")
+	@NotEmpty
 	private String organization;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Donation> totalDonations;
 	
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
+	
+//	@NotNull
+//	private Boolean closed;
+	
+	public void addDonation(Donation donation) {
+		this.getTotalDonations().add(donation);
+	}
+	
+	public Set<Donation> getTotalDonations() {
+		if (this.totalDonations == null) {
+			return new HashSet<>();
+		}
+		return this.totalDonations;
+	}
+
+	public void setTotalDonations(Set<Donation> totalDonations) {
+		this.totalDonations = totalDonations;
+	}
 	
 	public Owner getOwner() {
 		return owner;
@@ -63,6 +95,14 @@ public class Cause extends BaseEntity{
 	
 	public void setGoal(Double goal) {
 		this.goal = goal;
+	}
+	
+	public Double getDonations() {
+		return donations;
+	}
+	
+	public void setDonations(Double donations) {
+		this.donations = donations;
 	}
 	
 	public String getOrganization() {

@@ -125,6 +125,7 @@ public class Pet extends NamedEntity {
 		getVisitsInternal().add(visit);
 		visit.setPet(this);
 	}
+	
 	public void removeVisit(Visit visit) {
 		List<Visit> visits = this.getVisits();
 		for (Visit v : visits) {
@@ -188,6 +189,14 @@ public class Pet extends NamedEntity {
 			}
 		}
 		this.adoptions.remove(adoption);
+	}
+	
+	public void setInAdoption(Boolean inAdoption) {
+		this.inAdoption = inAdoption;
+	}
+
+	public Boolean getInAdoption() {
+		return this.inAdoption;
 	}
 
 	
