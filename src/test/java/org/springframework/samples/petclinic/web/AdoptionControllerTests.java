@@ -190,12 +190,25 @@ public class AdoptionControllerTests {
 		.andExpect(view().name("/adoptions/existingAdoption"));
 	}
 	*/
+	@WithMockUser(value = "spring")
+	@Test
+	void testAcceptAdoptionApplicationNotAdministrator() throws Exception {
+		Adoption adoption = new Adoption();
+		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
+
+		mockMvc.perform(get("/adoptions/accept/{adoptionId}",TEST_ADOPTION_ID))
+			.andExpect(status().isOk())
+			.andExpect(view().name("welcome"));
+	}
 	
+	/*
 	@WithMockUser(value = "spring")
 	@Test
 	void testDenyAdoptionApplication() throws Exception {
 		Adoption adoption = new Adoption();
 		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(null);
 
 		mockMvc.perform(get("/adoptions/deny/{adoptionId}",TEST_ADOPTION_ID))
 			.andExpect(status().is3xxRedirection())
@@ -203,6 +216,19 @@ public class AdoptionControllerTests {
 			.andExpect(view().name("redirect:/adoptions/pendingAdoptionsList"));
 		
 		verify(adoptionService,times(1)).acceptAdoptionApplication(adoption);
+	}
+	*/
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testDenyAdoptionApplicationNotAdministrator() throws Exception {
+		Adoption adoption = new Adoption();
+		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
+
+		mockMvc.perform(get("/adoptions/deny/{adoptionId}",TEST_ADOPTION_ID))
+			.andExpect(status().isOk())
+			.andExpect(view().name("welcome"));
 	}
 
 }

@@ -134,9 +134,13 @@ public class AdoptionController {
 	@GetMapping(value="/accept/{adoptionId}")
 	public String acceptAdoptionApplication(@PathVariable("adoptionId") int adoptionId, Authentication authentication,
 		Map<String, Object> model) throws Exception {
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Boolean authenticated = authentication.isAuthenticated();
 		Adoption adoption = this.adoptionService.findAdoptionById(adoptionId);
-		if (userDetails==null) {
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner existingOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		
+		 if(existingOwner!=null || !authenticated){
 			return "welcome";
 		}else {
 			this.adoptionService.acceptAdoptionApplication(adoption);
@@ -151,24 +155,26 @@ public class AdoptionController {
 			this.ownerService.saveOwner(owner);
 			this.ownerService.saveOwner(possibleOwner);
 			this.petService.savePet(pet);
+			model.put("pendingAdoption", AdoptionStateType.PENDING);
+			return "redirect:/adoptions/pendingAdoptionsList";
 		}
-		model.put("pendingAdoption", AdoptionStateType.PENDING);
-		return "redirect:/adoptions/pendingAdoptionsList";
-		
 	}
 	
 	@GetMapping(value="/deny/{adoptionId}")
 	public String denyAdoptionApplication(@PathVariable("adoptionId") int adoptionId, Authentication authentication,
 		Map<String, Object> model) throws Exception {
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Boolean authenticated = authentication.isAuthenticated();
 		Adoption adoption = this.adoptionService.findAdoptionById(adoptionId);
-		if (userDetails==null) {
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner existingOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		
+		 if(existingOwner!=null || !authenticated){
 			return "welcome";
 		}else {
 			this.adoptionService.denyAdoptionApplication(adoption);
-		}
-		model.put("pendingAdoption", AdoptionStateType.PENDING);
-		return "redirect:/adoptions/pendingAdoptionsList";
-		
+			model.put("pendingAdoption", AdoptionStateType.PENDING);
+			return "redirect:/adoptions/pendingAdoptionsList";
+		}	
 	}
 }

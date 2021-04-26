@@ -91,6 +91,6 @@ INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VAL
 INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (2,'¡Todos con Leo!', 'Recaudación de fondos para operar a Leo tras su accidente', 'Your dog, our life', 200, 1, 200);
 INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (3,'Parque para Basil', 'Recaudación de fondos para darle a Basil un espacio en el que poder pasear y superar su miedo a desconocidos', 'We help to yours pets', 500, 2, 495);
 
-INSERT INTO adoptions(owner,possible_owner,description,adoption_state_type, pet_id) VALUES ('George Franklin','Manuel','I am a dog',1,'3');
-INSERT INTO adoptions(owner,possible_owner,description, adoption_state_type, pet_id) VALUES ('Javi Tecca','Luis','I am a cat',2,'1');
+INSERT INTO adoptions(owner,possible_owner,description,adoption_state_type, pet_id) VALUES ('owner1','owner2','I am a dog',2,'3');
+INSERT INTO adoptions(owner,possible_owner,description, adoption_state_type, pet_id) VALUES ('owner11','owner1','I am a cat',2,'1');
 
