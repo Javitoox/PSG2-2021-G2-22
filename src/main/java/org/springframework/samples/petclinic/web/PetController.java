@@ -174,19 +174,24 @@ public class PetController {
 	}
 
 	@GetMapping(value = "/pets/{petId}/inAdoption")
-	public String inAdoption(@PathVariable("petId") int petId, ModelMap modelMap, Authentication authentication) {
+	public String inAdoption(@PathVariable("petId") int petId, Model model, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		Owner loggedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-		modelMap.addAttribute("loggedOwner", loggedOwner);
+		Integer loggedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername()).getId();
+		model.addAttribute("loggedOwner", loggedOwner);
+
 		Pet pet = petService.findPetById(petId);
-		if (pet.getInAdoption() != true) {
+
+		if (pet.getOwner().getId() != loggedOwner) {
+			return "noPermission";
+		} else if (pet.getInAdoption() != true) {
+
 			pet.setInAdoption(true);
 			try {
 				petService.savePet(pet);
 			} catch (DataAccessException | DuplicatedPetNameException e) {
 				e.printStackTrace();
 			}
-		
+
 			return "redirect:/adoptions";
 		} else {
 			throw new IllegalArgumentException("Pet already in adoption");
