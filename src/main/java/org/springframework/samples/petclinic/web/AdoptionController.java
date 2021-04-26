@@ -42,7 +42,7 @@ public class AdoptionController {
 		this.ownerService = ownerService;
 	}
 
-	@GetMapping
+	@GetMapping()
 	public String adoptionList(ModelMap modelMap, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());

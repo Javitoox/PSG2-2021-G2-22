@@ -46,7 +46,7 @@ public class AdoptionService {
 	public Adoption findAdoptionByPossibleOwnerAndPet(String possibleOwner,Pet pet) throws DataAccessException {
 		return adoptionRepository.findByPossibleOwnerAndPet(possibleOwner,pet);
 	}
-	
+
 	@Transactional
 	public List<Adoption> findAllAdoptionsWithPendingState(List<Adoption> adoptions){
 		List<Adoption> res = new ArrayList<Adoption>();
@@ -69,6 +69,6 @@ public class AdoptionService {
 		adoption.setAdoptionStateType(AdoptionStateType.DECLINED);
 		this.adoptionRepository.save(adoption);
 	}
-	
+
 	
 }

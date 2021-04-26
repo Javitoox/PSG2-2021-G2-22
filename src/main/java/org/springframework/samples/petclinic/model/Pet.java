@@ -120,6 +120,7 @@ public class Pet extends NamedEntity {
 		getVisitsInternal().add(visit);
 		visit.setPet(this);
 	}
+	
 	public void removeVisit(Visit visit) {
 		List<Visit> visits = this.getVisits();
 		for (Visit v : visits) {

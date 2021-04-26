@@ -34,6 +34,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+
 @WebMvcTest(controllers = AdoptionController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class AdoptionControllerTests {
 
@@ -42,6 +43,7 @@ public class AdoptionControllerTests {
 	private static final int TEST_PET_ID = 1;
 	
 	private static final int TEST_ADOPTION_ID = 1;
+
 
 	@MockBean
 	private AdoptionService adoptionService;
@@ -67,6 +69,7 @@ public class AdoptionControllerTests {
 			.andExpect(model().attributeExists("pets"))
 			.andExpect(view().name("adoptions/adoptionList"));
 	}
+
 	
 	@WithMockUser(value = "spring")
 	@Test
@@ -94,6 +97,7 @@ public class AdoptionControllerTests {
 			.andExpect(model().attributeExists("adoptions"))
 			.andExpect(view().name("adoptions/stateAdoptionList"));
 	}
+
 	/*
 	@WithMockUser(value = "spring")
 	@Test
@@ -190,6 +194,7 @@ public class AdoptionControllerTests {
 		.andExpect(view().name("/adoptions/existingAdoption"));
 	}
 	*/
+
 	@WithMockUser(value = "spring")
 	@Test
 	void testAcceptAdoptionApplicationNotAdministrator() throws Exception {
@@ -230,5 +235,4 @@ public class AdoptionControllerTests {
 			.andExpect(status().isOk())
 			.andExpect(view().name("welcome"));
 	}
-
 }

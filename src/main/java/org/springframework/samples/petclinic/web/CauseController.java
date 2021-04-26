@@ -1,21 +1,22 @@
 package org.springframework.samples.petclinic.web;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.CauseService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +44,20 @@ public class CauseController {
 		model.addAttribute("cause", new Cause());
 		return v;
 	}
-
-
+	
+	@GetMapping("/{causeId}")
+	public String showCause(@PathVariable("causeId") Integer causeId, ModelMap model) {
+		Cause cause = this.causeService.findCauseById(causeId).orElse(null);
+		if(cause == null) {
+			return "redirect:/causes";
+		}else {
+			model.addAttribute("cause", cause);
+			return "/causes/listCauseDetails";
+		}
+	}
 	
 	@GetMapping("/new")
-    public String addNewCause(ModelMap model,Authentication authentication) {
+    public String addNewCause(ModelMap model, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 		
@@ -62,17 +72,22 @@ public class CauseController {
     }
 	
 	@PostMapping("/donate/{id}")
-    public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, ModelMap model) {
+    public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, Authentication authentication, ModelMap model) {
 		if(cause.getDonations() == null || result.hasFieldErrors("donations")) {
-			model.addAttribute("result", "Debe insertar un valor númerico");
+			model.addAttribute("result", "Debe insertar un valor númerico positivo");
 		}else {
-			Cause originalCause = this.causeService.findCausseById(id).orElse(null);
+			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
 			Double total = originalCause.getDonations() + cause.getDonations();
 			if(total > originalCause.getGoal()) {
 				model.addAttribute("result", "Debe insertar un valor cuya suma a las donaciones no supere el objetivo de la causa");
 			}else {
-				originalCause.setDonations(total);
-				this.causeService.saveCause(originalCause);
+				UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+				Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+				Donation donation = new Donation();
+				donation.setAmount(cause.getDonations());
+				donation.setOwner(owner);
+				donation.setDate(LocalDate.now());
+				this.causeService.updateDonationsCause(originalCause, total, donation);
 				model.addAttribute("result", "Donación realizada correctamente");
 			}
 		}
