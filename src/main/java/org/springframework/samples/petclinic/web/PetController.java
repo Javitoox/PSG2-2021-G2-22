@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Juergen Hoeller
@@ -174,15 +175,18 @@ public class PetController {
 	}
 
 	@GetMapping(value = "/pets/{petId}/inAdoption")
-	public String inAdoption(@PathVariable("petId") int petId, Model model, Authentication authentication) {
+	public ModelAndView inAdoption(@PathVariable("petId") int petId, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		Integer loggedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername()).getId();
-		model.addAttribute("loggedOwner", loggedOwner);
+		Integer loggedOwnerId = this.ownerService.findOwnerByUsername(userDetails.getUsername()).getId();
+		mav.addObject("loggedOwner", loggedOwnerId);
 
 		Pet pet = petService.findPetById(petId);
 
-		if (pet.getOwner().getId() != loggedOwner) {
-			return "noPermission";
+		if (pet.getOwner().getId() != loggedOwnerId) {
+			mav.setViewName("noPermission");
+			return mav;
 		} else if (pet.getInAdoption() != true) {
 
 			pet.setInAdoption(true);
@@ -191,8 +195,8 @@ public class PetController {
 			} catch (DataAccessException | DuplicatedPetNameException e) {
 				e.printStackTrace();
 			}
-
-			return "redirect:/adoptions";
+			mav.setViewName("redirect:/adoptions");
+			return mav;
 		} else {
 			throw new IllegalArgumentException("Pet already in adoption");
 		}
