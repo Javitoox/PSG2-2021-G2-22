@@ -185,6 +185,14 @@ public class Pet extends NamedEntity {
 		}
 		this.adoptions.remove(adoption);
 	}
+	
+	public void setInAdoption(Boolean inAdoption) {
+		this.inAdoption = inAdoption;
+	}
+
+	public Boolean getInAdoption() {
+		return this.inAdoption;
+	}
 
 	
 }

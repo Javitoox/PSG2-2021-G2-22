@@ -50,6 +50,14 @@
 				</petclinic:menuItem>
 				</sec:authorize>
 				
+				<sec:authorize access="hasAuthority('admin')">
+				<petclinic:menuItem active="${name eq 'adoptions'}" url="/adoptions/pendingAdoptionsList"
+					title="adoptions">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span><fmt:message key="label.menu.adoptions"/></span>
+				</petclinic:menuItem>
+				</sec:authorize>
+				
 				<sec:authorize access="hasAuthority('owner')">
 					<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
 						title="hotel">

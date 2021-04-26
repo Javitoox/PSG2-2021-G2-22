@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -11,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,19 @@ import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+
 @WebMvcTest(controllers = AdoptionController.class, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), excludeAutoConfiguration = SecurityConfiguration.class)
 public class AdoptionControllerTests {
 
 	private static final int TEST_OWNER_ID = 1;
 
 	private static final int TEST_PET_ID = 1;
+	
+	private static final int TEST_ADOPTION_ID = 1;
+
 
 	@MockBean
 	private AdoptionService adoptionService;
@@ -60,6 +69,35 @@ public class AdoptionControllerTests {
 			.andExpect(model().attributeExists("pets"))
 			.andExpect(view().name("adoptions/adoptionList"));
 	}
+
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testGetPendingAdoptionList() throws Exception {
+		List<Adoption> adoptions = new ArrayList<Adoption>();
+		given(this.adoptionService.findAll()).willReturn(adoptions);
+		given(this.adoptionService.findAllAdoptionsWithPendingState(adoptions)).willReturn(new ArrayList<Adoption>());
+
+		mockMvc.perform(get("/adoptions/pendingAdoptionsList"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("pendingAdoption"))
+			.andExpect(model().attributeExists("adoptions"))
+			.andExpect(view().name("adoptions/stateAdoptionList"));
+	}
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testGetAllAdoptionList() throws Exception {
+		List<Adoption> adoptions = new ArrayList<Adoption>();
+		given(this.adoptionService.findAll()).willReturn(adoptions);
+
+		mockMvc.perform(get("/adoptions/allAdoptionsList"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("pendingAdoption"))
+			.andExpect(model().attributeExists("adoptions"))
+			.andExpect(view().name("adoptions/stateAdoptionList"));
+	}
+
 	/*
 	@WithMockUser(value = "spring")
 	@Test
@@ -157,4 +195,44 @@ public class AdoptionControllerTests {
 	}
 	*/
 
+	@WithMockUser(value = "spring")
+	@Test
+	void testAcceptAdoptionApplicationNotAdministrator() throws Exception {
+		Adoption adoption = new Adoption();
+		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
+
+		mockMvc.perform(get("/adoptions/accept/{adoptionId}",TEST_ADOPTION_ID))
+			.andExpect(status().isOk())
+			.andExpect(view().name("welcome"));
+	}
+	
+	/*
+	@WithMockUser(value = "spring")
+	@Test
+	void testDenyAdoptionApplication() throws Exception {
+		Adoption adoption = new Adoption();
+		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(null);
+
+		mockMvc.perform(get("/adoptions/deny/{adoptionId}",TEST_ADOPTION_ID))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(model().attributeExists("pendingAdoption"))
+			.andExpect(view().name("redirect:/adoptions/pendingAdoptionsList"));
+		
+		verify(adoptionService,times(1)).acceptAdoptionApplication(adoption);
+	}
+	*/
+	
+	@WithMockUser(value = "spring")
+	@Test
+	void testDenyAdoptionApplicationNotAdministrator() throws Exception {
+		Adoption adoption = new Adoption();
+		given(this.adoptionService.findAdoptionById(TEST_ADOPTION_ID)).willReturn(adoption);
+		given(this.ownerService.findOwnerByUsername(any())).willReturn(new Owner());
+
+		mockMvc.perform(get("/adoptions/deny/{adoptionId}",TEST_ADOPTION_ID))
+			.andExpect(status().isOk())
+			.andExpect(view().name("welcome"));
+	}
 }
