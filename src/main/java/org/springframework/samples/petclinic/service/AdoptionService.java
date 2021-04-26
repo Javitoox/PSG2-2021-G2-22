@@ -59,13 +59,13 @@ public class AdoptionService {
 	}
 	
 	@Transactional
-	public void acceptAdoptionApplication(Adoption adoption) throws Exception {
+	public void acceptAdoptionApplication(Adoption adoption) {
 		adoption.setAdoptionStateType(AdoptionStateType.ACCEPTED);
 		this.adoptionRepository.save(adoption);
 	}
 	
 	@Transactional
-	public void denyAdoptionApplication(Adoption adoption) throws Exception {
+	public void denyAdoptionApplication(Adoption adoption) {
 		adoption.setAdoptionStateType(AdoptionStateType.DECLINED);
 		this.adoptionRepository.save(adoption);
 	}
