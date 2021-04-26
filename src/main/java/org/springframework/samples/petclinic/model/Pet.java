@@ -29,7 +29,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.beans.support.MutableSortDefinition;
@@ -94,8 +93,14 @@ public class Pet extends NamedEntity {
 		return this.owner;
 	}
 
-	protected void setOwner(Owner owner) {
+	public void setOwner(Owner owner) {
 		this.owner = owner;
+	}
+	public Boolean getInAdoption() {
+		return this.inAdoption;
+	}
+	public void setInAdoption(Boolean inAdoption) {
+		this.inAdoption = inAdoption;
 	}
 
 	protected Set<Visit> getVisitsInternal() {

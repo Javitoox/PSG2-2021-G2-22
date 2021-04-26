@@ -23,6 +23,7 @@
         <form:form modelAttribute="pet"
                    class="form-horizontal">
             <input type="hidden" name="id" value="${pet.id}"/>
+            <input type="hidden" name="inAdoption" value="false"/>
             <div class="form-group has-feedback">
                 <div class="form-group">
                     <label class="col-sm-2 control-label"><fmt:message key="label.createOrUpdatePetForm.owner"/></label>
