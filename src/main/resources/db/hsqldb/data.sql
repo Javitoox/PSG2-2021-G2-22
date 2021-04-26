@@ -88,8 +88,8 @@ INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (2, '20
 INSERT INTO reservations(id,start,end,special_cares,level,pet_id) VALUES (3, '2031-8-13', '2031-8-20', 'Food with a lot of vitamines', 'STANDARD', '5');
 
 INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (1,'Operación pierna', 'Operación de la pierna para un perro cojo', 'Dogs', 155.5, 1, 0);
-INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (2,'¡Todos con Leo!', 'Recaudación de fondos para operar a Leo tras su accidente', 'Your dog, our life', 200, 1, 200);
-INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (3,'Parque para Basil', 'Recaudación de fondos para darle a Basil un espacio en el que poder pasear y superar su miedo a desconocidos', 'We help to yours pets', 500, 2, 495);
+INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (2,'¡Todos con Leo!', 'Recaudación de fondos para operar a Leo tras su accidente', 'Your dog, our life', 200, 1, 0);
+INSERT INTO causes(id,name,description,organization,goal,owner_id,donations) VALUES (3,'Parque para Basil', 'Recaudación de fondos para darle a Basil un espacio en el que poder pasear y superar su miedo a desconocidos', 'We help to yours pets', 500, 2, 0);
 
 INSERT INTO adoptions(owner,possible_owner,description,adoption_state_type, pet_id) VALUES ('George Franklin','Manuel','I am a dog',1,'3');
 INSERT INTO adoptions(owner,possible_owner,description, adoption_state_type, pet_id) VALUES ('Javi Tecca','Luis','I am a cat',2,'1');
