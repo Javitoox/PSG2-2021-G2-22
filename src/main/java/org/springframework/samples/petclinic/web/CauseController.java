@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping( value = "/causes")
@@ -73,7 +74,7 @@ public class CauseController {
 	
 	@PostMapping("/donate/{id}")
     public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, Authentication authentication, ModelMap model) {
-		if(cause.getDonations() == null || result.hasFieldErrors("donations")) {
+		if(cause.getDonations() == null || result.hasFieldErrors("donations") || cause.getDonations()<0) {
 			model.addAttribute("result", "Debe insertar un valor númerico positivo");
 		}else {
 			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
@@ -97,19 +98,21 @@ public class CauseController {
     }
 
 	@PostMapping("/new")
-    public String saveNewCausa(@Valid Cause cause, BindingResult result, ModelMap model,Authentication authentication) {
+    public ModelAndView saveNewCausa(@Valid Cause cause, BindingResult result,Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 		
-		
+		ModelAndView mv = new ModelAndView();
         if (result.hasErrors()) {
-        	model.addAttribute("cause", cause);
-        	return "causes/causeForm";
+        	mv.addObject("cause", cause);
+        	mv.setViewName("causes/causeForm");
+        	return mv;
         } else {
         	cause.setDonations(0.);
-        	model.put("owner", owner.getId());
+        	cause.setOwner(owner);
         	causeService.saveCause(cause);
-        	return listCauses(model);
+        	mv.setViewName("redirect:/causes");
+        	return mv;
         }
     }
 

@@ -17,10 +17,7 @@
 	            <petclinic:inputField label="Description" name="description" />
 	            <petclinic:inputField label="Goal" name="goal"/>
 	            <petclinic:inputField label="Organization" name="organization" />
-	            <input type=hidden name="owner" value="${owner}" />
-	           
-	            
-	            
+	            <input type=hidden name="owner" value="${owner}" /> 
             </div>
 	        <div class="form-group">
 	            <div class="col-sm-offset-2 col-sm-10">

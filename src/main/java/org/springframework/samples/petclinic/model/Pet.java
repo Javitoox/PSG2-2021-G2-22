@@ -189,5 +189,5 @@ public class Pet extends NamedEntity {
 			}
 		}
 		this.adoptions.remove(adoption);
-	}	
+	}
 }
