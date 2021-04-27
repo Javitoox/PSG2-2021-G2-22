@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -152,6 +153,14 @@ public class AdoptionController {
 			owner.removePet(pet);
 			possibleOwner.addPet(pet);
 			pet.setInAdoption(false);
+			
+			List<Adoption> adoptions =pet.getAdoptions();
+			for(Adoption adop: adoptions) {
+				if(adop.getAdoptionStateType().equals(AdoptionStateType.PENDING)) {
+					this.adoptionService.denyAdoptionApplication(adop);
+				}
+			}
+			
 			this.ownerService.saveOwner(owner);
 			this.ownerService.saveOwner(possibleOwner);
 			this.petService.savePet(pet);
