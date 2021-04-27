@@ -35,6 +35,8 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.sun.istack.NotNull;
+
 /**
  * Simple business object representing a pet.
  *
@@ -63,6 +65,13 @@ public class Pet extends NamedEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
 	private Set<Reservation> reservations;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
+	private Set<Adoption> adoptions;
+	
+	@NotNull
+	@Column(name = "in_adoption")
+	private Boolean inAdoption;
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
@@ -84,8 +93,14 @@ public class Pet extends NamedEntity {
 		return this.owner;
 	}
 
-	protected void setOwner(Owner owner) {
+	public void setOwner(Owner owner) {
 		this.owner = owner;
+	}
+	public Boolean getInAdoption() {
+		return this.inAdoption;
+	}
+	public void setInAdoption(Boolean inAdoption) {
+		this.inAdoption = inAdoption;
 	}
 
 	protected Set<Visit> getVisitsInternal() {
@@ -110,6 +125,7 @@ public class Pet extends NamedEntity {
 		getVisitsInternal().add(visit);
 		visit.setPet(this);
 	}
+	
 	public void removeVisit(Visit visit) {
 		List<Visit> visits = this.getVisits();
 		for (Visit v : visits) {
@@ -143,5 +159,37 @@ public class Pet extends NamedEntity {
 		}
 		this.reservations.remove(reservation);
 	}
+	
+	protected Set<Adoption> getAdoptionsInternal() {
+		if (this.adoptions == null) {
+			this.adoptions  = new HashSet<>();
+		}
+		return this.adoptions;
+	}
+	
+	protected void setAdoptionsInternal(Set<Adoption> adoptions) {
+		this.adoptions = adoptions;
+	}
+	public List<Adoption> getAdoptions() {
+		List<Adoption> sortedAdoptions = new ArrayList<>(getAdoptionsInternal());
+		PropertyComparator.sort(sortedAdoptions, new MutableSortDefinition("date", false, false));
+		return Collections.unmodifiableList(sortedAdoptions);
+	}
+	
+
+	public void addAdoption(Adoption adoption) {
+		getAdoptionsInternal().add(adoption);
+		adoption.setPet(this);
+	}
+	public void removeAdoption(Adoption adoption) {
+		List<Adoption> adoptions = this.getAdoptions();
+		for (Adoption a : adoptions) {
+			if (a.getDescription() == null) {
+				this.adoptions.remove(a);
+			}
+		}
+		this.adoptions.remove(adoption);
+	}
+
 	
 }

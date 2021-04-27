@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -12,21 +11,15 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Reservation;
-import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.OwnerService;
-import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.ReservationService;
-import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.samples.petclinic.util.ReservationValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
@@ -41,14 +34,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HotelController {
 	
 	private final ReservationService reservationService;
-	private final PetService petService;
 	private final OwnerService ownerService;
 	
 	@Autowired
-	public HotelController(ReservationService reservationService, OwnerService ownerService,PetService petService) {
+	public HotelController(ReservationService reservationService, OwnerService ownerService) {
 		this.reservationService = reservationService;
 		this.ownerService = ownerService;
-		this.petService = petService;
 	}
 	
 	@ModelAttribute("pets")
@@ -102,14 +93,29 @@ public class HotelController {
 			}
 			return "hotel/reservation";
 		}else {
-			this.reservationService.saveReservation(reservation);
-			return "welcome";
+			Boolean alreadyExists = this.reservationService.findConcurrentReservation(reservation.getStart(), 
+					reservation.getEnd(), reservation.getPet().getId());
+			if(!alreadyExists) {
+				this.reservationService.saveReservation(reservation);
+				return "welcome";
+			}else {
+				FieldError e = new FieldError("reservation", "start", "Ya ha realizado una reserva para dicha mascota con fechas solapadas");
+				result.addError(e);
+				return "hotel/reservation";
+			}
 		}
 	}
 	
 	@GetMapping(value = "/list")
 	public String listReservations(Map<String, Object> model) {
 		model.put("reservations", this.reservationService.allReservations());
+		return "hotel/reservationList";
+	}
+	
+	@GetMapping(value = "/myReservations")
+	public String myReservations(Map<String, Object> model, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		model.put("reservations", this.reservationService.myReservations(userDetails.getUsername()));
 		return "hotel/reservationList";
 	}
 

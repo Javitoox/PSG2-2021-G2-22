@@ -43,6 +43,22 @@
 				</petclinic:menuItem>
 				
 				<sec:authorize access="hasAuthority('owner')">
+				<petclinic:menuItem active="${name eq 'adoptions'}" url="/adoptions"
+					title="adoptions">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span><fmt:message key="label.menu.adoptions"/></span>
+				</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('admin')">
+				<petclinic:menuItem active="${name eq 'adoptions'}" url="/adoptions/pendingAdoptionsList"
+					title="adoptions">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span><fmt:message key="label.menu.adoptions"/></span>
+				</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('owner')">
 					<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
 						title="hotel">
 						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
@@ -55,6 +71,14 @@
 						title="hotel">
 						<span class="glyphicon glyphicon-glass" aria-hidden="true"></span>
 						<span>Hotel</span>
+					</petclinic:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAuthority('owner')">
+					<petclinic:menuItem active="${name eq 'causes'}" url="/causes"
+						title="causes">
+						<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+						<span><fmt:message key="label.causes"/></span>
 					</petclinic:menuItem>
 				</sec:authorize>
 				
