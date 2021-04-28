@@ -55,6 +55,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
+	private static final String OWNERS_INIT_REDIRECT = "redirect:/owners/{ownerId}";
 
 	private final PetService petService;
 	private final OwnerService ownerService;
@@ -77,13 +78,6 @@ public class PetController {
 	public Owner findOwner(@PathVariable("ownerId") int ownerId) {
 		return this.ownerService.findOwnerById(ownerId);
 	}
-
-	/*
-	 * @ModelAttribute("pet") public Pet findPet(@PathVariable("petId") Integer
-	 * petId) { Pet result=null; if(petId!=null)
-	 * result=this.clinicService.findPetById(petId); else result=new Pet(); return
-	 * result; }
-	 */
 
 	@InitBinder("owner")
 	public void initOwnerBinder(WebDataBinder dataBinder) {
@@ -116,7 +110,7 @@ public class PetController {
 				result.rejectValue("name", "duplicate", "already exists");
 				return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 			}
-			return "redirect:/owners/{ownerId}";
+			return OWNERS_INIT_REDIRECT;
 		}
 	}
 
@@ -152,26 +146,23 @@ public class PetController {
 				result.rejectValue("name", "duplicate", "already exists");
 				return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 			}
-			return "redirect:/owners/{ownerId}";
+			return OWNERS_INIT_REDIRECT;
 		}
 	}
 
 	@GetMapping(value = "/pets/{petId}/delete")
 	public String processDeletePet(@PathVariable("petId") int petId, Owner owner, Model model) {
 		Pet pet = petService.findPetById(petId);
-//    	Collection<Visit> visits = petService.findVisitsByPetId(pet.getId());
 		Collection<Reservation> reservations = reservationService.findReservationsByPetId(petId);
 		if (pet != null && pet.getOwner().equals(owner)) {
 			ownerService.findOwnerById(owner.getId()).removePet(pet);
-//    		petService.deletePetVisits(visits);
 			reservationService.deleteAllReservations(reservations);
 			petService.deletePet(pet);
 			ownerService.saveOwner(owner);
-			return "redirect:/owners/{ownerId}";
+			return OWNERS_INIT_REDIRECT;
 		} else {
 			throw new IllegalArgumentException("Pet not found.");
 		}
-
 	}
 
 	@GetMapping(value = "/pets/{petId}/inAdoption")
@@ -184,10 +175,10 @@ public class PetController {
 
 		Pet pet = petService.findPetById(petId);
 
-		if (pet.getOwner().getId() != loggedOwnerId) {
+		if (!pet.getOwner().getId().equals(loggedOwnerId)) {
 			mav.setViewName("noPermission");
 			return mav;
-		} else if (pet.getInAdoption() != true) {
+		} else if (!pet.getInAdoption()) {
 
 			pet.setInAdoption(true);
 			try {
