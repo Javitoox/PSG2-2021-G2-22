@@ -175,10 +175,10 @@ public class PetController {
 
 		Pet pet = petService.findPetById(petId);
 
-		if (!pet.getOwner().getId().equals(loggedOwnerId)) {
+		if (pet.getOwner().getId() != loggedOwnerId) {
 			mav.setViewName("noPermission");
 			return mav;
-		} else if (!pet.getInAdoption()) {
+		} else if (pet.getInAdoption() != true) {
 
 			pet.setInAdoption(true);
 			try {
