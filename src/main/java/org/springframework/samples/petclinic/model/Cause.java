@@ -46,9 +46,6 @@ public class Cause extends BaseEntity{
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
 	
-//	@NotNull
-//	private Boolean closed;
-	
 	public void addDonation(Donation donation) {
 		this.getTotalDonations().add(donation);
 	}

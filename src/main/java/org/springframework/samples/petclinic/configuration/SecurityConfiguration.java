@@ -25,6 +25,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	private static final String ADMIN = "admin";
+	private static final String OWNER = "owner";
 
 	@Autowired
 	DataSource dataSource;
@@ -35,13 +38,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
-				.antMatchers("/admin/**").hasAnyAuthority("admin")
-				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/hotel", "/hotel/myReservations").hasAuthority("owner")
-				.antMatchers("/hotel/**").hasAuthority("admin")
+				.antMatchers("/admin/**").hasAnyAuthority(ADMIN)
+				.antMatchers("/owners/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/hotel", "/hotel/myReservations").hasAuthority(OWNER)
+				.antMatchers("/hotel/**").hasAuthority(ADMIN)
 				.antMatchers("/vets/**").authenticated()
-				.antMatchers("/adoptions/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/causes/**").hasAnyAuthority("owner","admin")
+				.antMatchers("/adoptions/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/causes/**").hasAnyAuthority(OWNER,ADMIN)
 				.anyRequest().denyAll()
 				.and()
 				 	.formLogin()
@@ -75,8 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {	    
-		PasswordEncoder encoder =  NoOpPasswordEncoder.getInstance();
-	    return encoder;
+		return  NoOpPasswordEncoder.getInstance();
 	}
 	
 }

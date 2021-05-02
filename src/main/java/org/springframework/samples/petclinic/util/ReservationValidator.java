@@ -11,13 +11,11 @@ public class ReservationValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
 		return Reservation.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
 		Reservation reservation = (Reservation) target;
 
 		LocalDate start = reservation.getStart();
