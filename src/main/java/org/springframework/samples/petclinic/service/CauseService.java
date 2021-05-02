@@ -24,16 +24,16 @@ public class CauseService {
 
 	@Transactional(readOnly=true)
 	public Collection<Cause> findAll() throws DataAccessException{
-		return (Collection<Cause>) this.causeRepository.findAll();
+		return this.causeRepository.findAll();
 	}
 
 	@Transactional
-	public void saveCause(@Valid Cause Causa)  throws DataAccessException {
-		causeRepository.save(Causa);
+	public void saveCause(@Valid Cause cause)  throws DataAccessException {
+		causeRepository.save(cause);
 	}
 	@Transactional(readOnly = true)
 	public Collection<Cause> allCauses() throws DataAccessException{
-		return (Collection<Cause>) this.causeRepository.findAll();
+		return this.causeRepository.findAll();
 	}
 	@Transactional(readOnly = true)
 	public Optional<Cause> findCauseById(int id) throws DataAccessException {
