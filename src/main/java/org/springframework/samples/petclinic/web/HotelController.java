@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/hotel")
 public class HotelController {
 	
+	private static final String RESERVATION = "reservation";
+	private static final String HOTEL_RESERVATION = "hotel/reservation";
+	
 	private final ReservationService reservationService;
 	private final OwnerService ownerService;
 	
@@ -49,7 +53,7 @@ public class HotelController {
 			Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 			return owner.getPets();
 		}catch(Exception e) {
-			return null;
+			return new ArrayList<>();
 		}
 	}
 	
@@ -66,8 +70,8 @@ public class HotelController {
 		if(owner == null) {
 			return "hotel/noPets";
 		}else {
-			model.put("reservation", new Reservation());
-			return "hotel/reservation";
+			model.put(RESERVATION, new Reservation());
+			return HOTEL_RESERVATION;
 		}
 	}
 	
@@ -80,28 +84,28 @@ public class HotelController {
 		Validator validator = factory.getValidator();
 		Set<ConstraintViolation<Reservation>> violations = validator.validate(reservation);
 		
-		if (result.hasErrors() || violations.size() > 0 || (reservation.getPet() != null && !owner.getPets().contains(reservation.getPet()))) {
-			if (violations.size() > 0) {
+		if (result.hasErrors() || !violations.isEmpty() || (reservation.getPet() != null && !owner.getPets().contains(reservation.getPet()))) {
+			if (!violations.isEmpty()) {
 				for (ConstraintViolation<Reservation> v : violations) {
-					FieldError e = new FieldError("reservation", v.getPropertyPath().toString(), v.getMessageTemplate());
+					FieldError e = new FieldError(RESERVATION, v.getPropertyPath().toString(), v.getMessageTemplate());
 					result.addError(e);
 				}
 			}
 			if(reservation.getPet() != null && !owner.getPets().contains(reservation.getPet())) {
-				FieldError e = new FieldError("reservation", "pet", "Debes seleccionar una mascota asociada a ti");
+				FieldError e = new FieldError(RESERVATION, "pet", "Debes seleccionar una mascota asociada a ti");
 				result.addError(e);
 			}
-			return "hotel/reservation";
+			return HOTEL_RESERVATION;
 		}else {
 			Boolean alreadyExists = this.reservationService.findConcurrentReservation(reservation.getStart(), 
 					reservation.getEnd(), reservation.getPet().getId());
-			if(!alreadyExists) {
+			if(Boolean.FALSE.equals(alreadyExists)) {
 				this.reservationService.saveReservation(reservation);
 				return "welcome";
 			}else {
-				FieldError e = new FieldError("reservation", "start", "Ya ha realizado una reserva para dicha mascota con fechas solapadas");
+				FieldError e = new FieldError(RESERVATION, "start", "Ya ha realizado una reserva para dicha mascota con fechas solapadas");
 				result.addError(e);
-				return "hotel/reservation";
+				return HOTEL_RESERVATION;
 			}
 		}
 	}
@@ -118,25 +122,5 @@ public class HotelController {
 		model.put("reservations", this.reservationService.myReservations(userDetails.getUsername()));
 		return "hotel/reservationList";
 	}
-
-//	@GetMapping(value = "/hotel/{reservationId}/delete")
-//	public String deleteReservation(@PathVariable("reservationId") int reservationId, ModelMap model) {
-//		Optional<Reservation> reservation = reservationService.findReservationById(reservationId);
-//		System.out.println("-------------------------------    "+ reservation);
-//			Pet pet = reservation.get().getPet();
-//			pet.removeReservation(reservation.get());
-//			try {
-//				petService.savePet(pet);
-//			} catch (DataAccessException | DuplicatedPetNameException e) {
-//				e.printStackTrace();
-//			}
-//		
-//			try {
-//				reservationService.deleteReservation(reservation.get());
-//			} catch (DataAccessException e) {
-//				e.printStackTrace();
-//			}
-//			return "hotel/reservationList";
-//	}
 	
 }
