@@ -101,6 +101,7 @@ class PetServiceTests {
 		Pet pet = new Pet();
 		pet.setName("bowser");
 		pet.setId(0);
+		pet.setInAdoption(false);
 		Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
@@ -130,6 +131,7 @@ class PetServiceTests {
 		Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
+		pet.setInAdoption(false);
 		owner6.addPet(pet);
 		try {
 			petService.savePet(pet);		
@@ -173,6 +175,7 @@ class PetServiceTests {
 		Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
+		pet.setInAdoption(false);
 		owner6.addPet(pet);
 		pet.setId(0);
 		
