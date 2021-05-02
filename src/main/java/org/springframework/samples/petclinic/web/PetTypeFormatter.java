@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.service.PetService;
-import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,7 +36,7 @@ import org.springframework.stereotype.Component;
  * Also see how the bean 'conversionService' has been declared inside
  * /WEB-INF/mvc-core-config.xml
  *
- * @author Mark Fisher
+ * @author Mark Fisher	
  * @author Juergen Hoeller
  * @author Michael Isvy
  */

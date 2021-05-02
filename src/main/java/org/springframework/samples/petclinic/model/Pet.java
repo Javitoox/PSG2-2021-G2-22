@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -30,12 +31,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sun.istack.NotNull;
+
 
 /**
  * Simple business object representing a pet.
@@ -127,8 +129,8 @@ public class Pet extends NamedEntity {
 	}
 	
 	public void removeVisit(Visit visit) {
-		List<Visit> visits = this.getVisits();
-		for (Visit v : visits) {
+		List<Visit> allVisits = this.getVisits();
+		for (Visit v : allVisits) {
 			if (v.getDescription() == null) {
 				this.visits.remove(v);
 			}
@@ -153,8 +155,8 @@ public class Pet extends NamedEntity {
 		return Collections.unmodifiableList(sortedReservations);
 	}
 	public void removeReservation(Reservation reservation) {
-		List<Reservation> reservations = this.getReservations();
-		for (Reservation r : reservations) {
+		List<Reservation> allReservations = this.getReservations();
+		for (Reservation r : allReservations) {
 			this.reservations.remove(r);
 		}
 		this.reservations.remove(reservation);
@@ -182,8 +184,8 @@ public class Pet extends NamedEntity {
 		adoption.setPet(this);
 	}
 	public void removeAdoption(Adoption adoption) {
-		List<Adoption> adoptions = this.getAdoptions();
-		for (Adoption a : adoptions) {
+		List<Adoption> allAdoptions = this.getAdoptions();
+		for (Adoption a : allAdoptions) {
 			if (a.getDescription() == null) {
 				this.adoptions.remove(a);
 			}
