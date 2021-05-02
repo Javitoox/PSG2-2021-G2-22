@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -29,7 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/adoptions")
 public class AdoptionController {
-
+	
+	private static final String POSSIBLE_OWNER = "possibleOwner";
+	private static final String PENDING_ADOPTION = "pendingAdoption";
+	private static final String WELCOME = "welcome";
+	
 	private final AdoptionService adoptionService;
 
 	private final PetService petService;
@@ -47,7 +50,7 @@ public class AdoptionController {
 	public String adoptionList(ModelMap modelMap, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		Owner possibleOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-		modelMap.addAttribute("possibleOwner", possibleOwner);
+		modelMap.addAttribute(POSSIBLE_OWNER, possibleOwner);
 
 		String view = "adoptions/adoptionList";
 		Iterable<Pet> pets = this.petService.findPetsInAdoption();
@@ -58,7 +61,7 @@ public class AdoptionController {
 	
 	@GetMapping(value="/pendingAdoptionsList")
 	public String pendingAdoptionList(ModelMap modelMap) {
-		modelMap.addAttribute("pendingAdoption", AdoptionStateType.PENDING);
+		modelMap.addAttribute(PENDING_ADOPTION, AdoptionStateType.PENDING);
 		List<Adoption> adoptions = (List<Adoption>)this.adoptionService.findAll();
 		modelMap.addAttribute("adoptions", this.adoptionService.findAllAdoptionsWithPendingState(adoptions));
 		return "adoptions/stateAdoptionList";
@@ -66,7 +69,7 @@ public class AdoptionController {
 	
 	@GetMapping(value="/allAdoptionsList")
 	public String allAdoptionList(ModelMap modelMap) {
-		modelMap.addAttribute("pendingAdoption", AdoptionStateType.PENDING);
+		modelMap.addAttribute(PENDING_ADOPTION, AdoptionStateType.PENDING);
 		modelMap.addAttribute("adoptions", this.adoptionService.findAll());
 		return "adoptions/stateAdoptionList";
 	}
@@ -88,7 +91,7 @@ public class AdoptionController {
 			String ownerName = owner.getUser().getUsername();
 
 		
-			model.put("possibleOwner", possibleOwnerName);
+			model.put(POSSIBLE_OWNER, possibleOwnerName);
 			model.put("originalOwner", ownerName);
 			model.put("adoption",new Adoption());
 			return "/adoptions/applicationForm";
@@ -108,7 +111,7 @@ public class AdoptionController {
 			Owner owner = pet.getOwner();
 			String ownerName = owner.getUser().getUsername();
 			
-			model.put("possibleOwner", possibleOwnerName);
+			model.put(POSSIBLE_OWNER, possibleOwnerName);
 			model.put("originalOwner", ownerName);
 			
 			return "/adoptions/applicationForm";
@@ -126,7 +129,7 @@ public class AdoptionController {
 				this.petService.savePet(pet);
 
 				model.put("adoption",adoption);
-				return "welcome";	
+				return WELCOME;	
 				}
 		}
 	}
@@ -134,7 +137,7 @@ public class AdoptionController {
 	
 	@GetMapping(value="/accept/{adoptionId}")
 	public String acceptAdoptionApplication(@PathVariable("adoptionId") int adoptionId, Authentication authentication,
-		Map<String, Object> model) throws Exception {
+		Map<String, Object> model) throws DataAccessException, DuplicatedPetNameException {
 		Boolean authenticated = authentication.isAuthenticated();
 		Adoption adoption = this.adoptionService.findAdoptionById(adoptionId);
 		
@@ -142,7 +145,7 @@ public class AdoptionController {
 		Owner existingOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 		
 		 if(existingOwner!=null || !authenticated){
-			return "welcome";
+			return WELCOME;
 		}else {
 			this.adoptionService.acceptAdoptionApplication(adoption);
 			
@@ -164,14 +167,14 @@ public class AdoptionController {
 			this.ownerService.saveOwner(owner);
 			this.ownerService.saveOwner(possibleOwner);
 			this.petService.savePet(pet);
-			model.put("pendingAdoption", AdoptionStateType.PENDING);
+			model.put(PENDING_ADOPTION, AdoptionStateType.PENDING);
 			return "redirect:/adoptions/pendingAdoptionsList";
 		}
 	}
 	
 	@GetMapping(value="/deny/{adoptionId}")
 	public String denyAdoptionApplication(@PathVariable("adoptionId") int adoptionId, Authentication authentication,
-		Map<String, Object> model) throws Exception {
+		Map<String, Object> model) throws DataAccessException, DuplicatedPetNameException {
 		Boolean authenticated = authentication.isAuthenticated();
 		Adoption adoption = this.adoptionService.findAdoptionById(adoptionId);
 		
@@ -179,10 +182,10 @@ public class AdoptionController {
 		Owner existingOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
 		
 		 if(existingOwner!=null || !authenticated){
-			return "welcome";
+			return WELCOME;
 		}else {
 			this.adoptionService.denyAdoptionApplication(adoption);
-			model.put("pendingAdoption", AdoptionStateType.PENDING);
+			model.put(PENDING_ADOPTION, AdoptionStateType.PENDING);
 			return "redirect:/adoptions/pendingAdoptionsList";
 		}	
 	}

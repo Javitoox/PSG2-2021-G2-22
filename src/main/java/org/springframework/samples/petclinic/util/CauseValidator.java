@@ -8,13 +8,11 @@ public class CauseValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
 		return Cause.class.isAssignableFrom(clazz);
 	}
 	
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
 		Cause cause = (Cause) target;
 		Double goal = cause.getGoal();
 		

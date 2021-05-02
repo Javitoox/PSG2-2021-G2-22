@@ -21,13 +21,11 @@ public class PetFormatter implements Formatter<Pet>{
 
 	@Override
 	public String print(Pet object, Locale locale) {
-		// TODO Auto-generated method stub
 		return object.getName()+" con identificador:"+object.getId();
 	}
 
 	@Override
 	public Pet parse(String text, Locale locale) throws ParseException {
-		// TODO Auto-generated method stub
 		String[] s = text.split(":");
 		Pet result = this.petService.findPetById(Integer.parseInt(s[s.length-1]));
 		if(result != null) {

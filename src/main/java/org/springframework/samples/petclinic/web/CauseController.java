@@ -26,6 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping( value = "/causes")
 public class CauseController {
 	
+	private static final String CAUSES_RESULT = "result";
+	private static final String CAUSES_CAUSE = "cause";
+	
 	private final CauseService causeService;
 	private final OwnerService ownerService;
 
@@ -41,8 +44,8 @@ public class CauseController {
 		String v = "causes/listCause";
 		Collection<Cause> causes = this.causeService.findAll();
 		model.addAttribute("causes", causes);
-		model.addAttribute("result", "¡Bienvenid@ a las causas disponibles en nuestra web!");
-		model.addAttribute("cause", new Cause());
+		model.addAttribute(CAUSES_RESULT, "¡Bienvenid@ a las causas disponibles en nuestra web!");
+		model.addAttribute(CAUSES_CAUSE, new Cause());
 		return v;
 	}
 	
@@ -52,7 +55,7 @@ public class CauseController {
 		if(cause == null) {
 			return "redirect:/causes";
 		}else {
-			model.addAttribute("cause", cause);
+			model.addAttribute(CAUSES_CAUSE, cause);
 			return "/causes/listCauseDetails";
 		}
 	}
@@ -66,7 +69,7 @@ public class CauseController {
 			return "redirect:/login";
 		}else {
 			model.put("owner", owner.getId());
-			model.put("cause",new Cause());
+			model.put(CAUSES_CAUSE,new Cause());
 			return "causes/causeForm";
 		}
         
@@ -75,21 +78,25 @@ public class CauseController {
 	@PostMapping("/donate/{id}")
     public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, Authentication authentication, ModelMap model) {
 		if(cause.getDonations() == null || result.hasFieldErrors("donations") || cause.getDonations()<0) {
-			model.addAttribute("result", "Debe insertar un valor númerico positivo");
+			model.addAttribute(CAUSES_RESULT, "Debe insertar un valor númerico positivo");
 		}else {
 			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
-			Double total = originalCause.getDonations() + cause.getDonations();
-			if(total > originalCause.getGoal()) {
-				model.addAttribute("result", "Debe insertar un valor cuya suma a las donaciones no supere el objetivo de la causa");
+			if(originalCause == null) {
+				model.addAttribute(CAUSES_RESULT, "La causa no existe");
 			}else {
-				UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-				Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-				Donation donation = new Donation();
-				donation.setAmount(cause.getDonations());
-				donation.setOwner(owner);
-				donation.setDate(LocalDate.now());
-				this.causeService.updateDonationsCause(originalCause, total, donation);
-				model.addAttribute("result", "Donación realizada correctamente");
+				Double total = originalCause.getDonations() + cause.getDonations();
+				if(total > originalCause.getGoal()) {
+					model.addAttribute(CAUSES_RESULT, "Debe insertar un valor cuya suma a las donaciones no supere el objetivo de la causa");
+				}else {
+					UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+					Owner owner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+					Donation donation = new Donation();
+					donation.setAmount(cause.getDonations());
+					donation.setOwner(owner);
+					donation.setDate(LocalDate.now());
+					this.causeService.updateDonationsCause(originalCause, total, donation);
+					model.addAttribute(CAUSES_RESULT, "Donación realizada correctamente");
+				}
 			}
 		}
 		Collection<Cause> causes = this.causeService.findAll();
@@ -104,7 +111,7 @@ public class CauseController {
 		
 		ModelAndView mv = new ModelAndView();
         if (result.hasErrors()) {
-        	mv.addObject("cause", cause);
+        	mv.addObject(CAUSES_CAUSE, cause);
         	mv.setViewName("causes/causeForm");
         	return mv;
         } else {
