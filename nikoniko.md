@@ -58,7 +58,7 @@ In the retrospective meeting, the team has a discussion about those results.
 | April 28      |    :neutral_face:     |        :smiley:         |      :fearful:            |              :smiley:          |               -                |
 | April 29      |    :neutral_face:     |           -             |    :fearful:   :fearful:  |               -                |               -                |
 | April 30      |    :neutral_face:     |        :smiley:         |      :neutral_face:       |              :neutral_face:    |    :neutral_face:              |
-| May 1         |          -            |           -             |       :smiley:            |               -                |               -                |
+| May 1         |          -            |           -             |           -               |               -                |               -                |
 | May 2         |   :smiley:            |           -             |       :smiley:            |               :smiley:         |        :neutral_face:          |
 | May 3         |   :smiley:            |        :smiley:         |       :smiley:            |               :smiley:         |       :smiley:                 |
 | May 4         |                       |                         |                           |                                |                                |
