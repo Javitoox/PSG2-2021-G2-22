@@ -82,10 +82,10 @@
 					</petclinic:menuItem>
 				</sec:authorize>
 				
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
-					title="trigger a RuntimeException to see how it is handled">
-					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-					<span><fmt:message key="label.menu.error"/></span>
+				<petclinic:menuItem active="${name eq 'health'}" url="/health"
+					title="health">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					<span><fmt:message key="label.health"/></span>
 				</petclinic:menuItem>
 
 			</ul>
