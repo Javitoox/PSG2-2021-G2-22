@@ -61,4 +61,19 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 1         |          -            |           -             |           -               |               -                |               -                |
 | May 2         |   :smiley:            |           -             |       :smiley:            |               :smiley:         |        :neutral_face:          |
 | May 3         |   :smiley:            |        :smiley:         |       :smiley:            |               :smiley:         |       :smiley:                 |
-| May 4         |                       |                         |                           |                                |                                |
+| May 4         |                       |                         |                           |                                |       :smiley:                 |
+| May 5         |                       |                         |                           |                                |       :smiley:                 |
+| May 6         |                       |                         |                           |                                |         -                      |
+| May 7         |                       |                         |                           |                                |         -                      |
+| May 8         |                       |                         |                           |                                |          -                     |
+| May 9         |                       |                         |                           |                                |        :neutral_face:          |
+| May 10        |                       |                         |                           |                                |                                |
+| May 11        |                       |                         |                           |                                |                                |
+| May 12        |                       |                         |                           |                                |                                |
+| May 13        |                       |                         |                           |                                |                                |
+| May 14        |                       |                         |                           |                                |                                |
+| May 15        |                       |                         |                           |                                |                                |
+| May 16        |                       |                         |                           |                                |                                |
+| May 17        |                       |                         |                           |                                |                                |
+| May 18        |                       |                         |                           |                                |                                |
+
