@@ -61,11 +61,11 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 1         |          -            |           -             |           -               |               -                |               -                |
 | May 2         |   :smiley:            |           -             |       :smiley:            |               :smiley:         |        :neutral_face:          |
 | May 3         |   :smiley:            |        :smiley:         |       :smiley:            |               :smiley:         |       :smiley:                 |
-| May 4         |          -            |                         |                           |                                |       :smiley:                 |
-| May 5         |          -            |                         |                           |                                |       :smiley:                 |
-| May 6         |   :smiley:            |                         |                           |                                |         -                      |
-| May 7         |    :neutral_face:     |                         |                           |                                |         -                      |
-| May 8         |    :neutral_face:     |                         |                           |                                |          -                     |
+| May 4         |          -            |                         |                           |                                |       -                        |
+| May 5         |          -            |                         |                           |                                |       -                        |
+| May 6         |   :smiley:            |                         |                           |                                |       :smiley:                 |
+| May 7         |    :neutral_face:     |                         |                           |                                |    :neutral_face:              |
+| May 8         |    :neutral_face:     |                         |                           |                                |       :smiley:                 |
 | May 9         |                       |                         |                           |                                |        :neutral_face:          |
 | May 10        |                       |                         |                           |                                |                                |
 | May 11        |                       |                         |                           |                                |                                |
