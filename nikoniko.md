@@ -68,8 +68,8 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 8         |    :neutral_face:     |                         |       :neutral_face:      |                -               |       :smiley:                 |
 | May 9         |    :neutral_face:     |                         |                           |              :smiley:          |        :neutral_face:          |
 | May 10        |    :neutral_face:     |                         |                           |                                |                                |
-| May 11        |                       |                         |                           |                                |                                |
-| May 12        |                       |                         |                           |                                |                                |
+| May 11        |          -            |                         |                           |                                |                                |
+| May 12        |   :smiley:            |                         |                           |                                |                                |
 | May 13        |                       |                         |                           |                                |                                |
 | May 14        |                       |                         |                           |                                |                                |
 | May 15        |                       |                         |                           |                                |                                |
