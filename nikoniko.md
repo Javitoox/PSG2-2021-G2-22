@@ -67,11 +67,11 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 7         |    :neutral_face:     |                         |        :smiley:           |              :neutral_face:    |    :neutral_face:              |
 | May 8         |    :neutral_face:     |                         |       :neutral_face:      |                -               |       :smiley:                 |
 | May 9         |    :neutral_face:     |                         |                           |              :smiley:          |        :neutral_face:          |
-| May 10        |    :neutral_face:     |                         |                           |                -               |                                |
-| May 11        |          -            |                         |                           |                -               |                                |
-| May 12        |   :smiley:            |                         |                           |                -               |                                |
-| May 13        |                       |                         |                           |              :smiley:          |                                |
-| May 14        |                       |                         |                           |                                |                                |
+| May 10        |    :neutral_face:     |                         |                           |                -               |               -                |
+| May 11        |          -            |                         |                           |                -               |               -                |
+| May 12        |   :smiley:            |                         |                           |                -               |               -                |
+| May 13        |                       |                         |                           |              :smiley:          |              :neutral_face:    |
+| May 14        |                       |                         |                           |                                |                :neutral_face:  |
 | May 15        |                       |                         |                           |                                |                                |
 | May 16        |                       |                         |                           |                                |                                |
 | May 17        |                       |                         |                           |                                |                                |
