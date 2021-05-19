@@ -76,4 +76,8 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 16        |                       |                         |        :smiley:           |                                |                                |
 | May 17        |                       |                         |        :fearful:          |                                |                                |
 | May 18        |                       |                         |         :neutral_face:    |                                |                                |
+| May 19        |                       |                         |         :smiley:          |                                |                                |
+| May 20        |                       |                         |         :neutral_face:    |                                |                                |
+| May 21        |                       |                         |                           |                                |                                |
+| May 22        |                       |                         |                           |                                |                                |
 
