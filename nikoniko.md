@@ -70,14 +70,27 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 10        |    :neutral_face:     |                         |          -                |                -               |               -                |
 | May 11        |          -            |                         |         :smiley:          |                -               |               -                |
 | May 12        |   :smiley:            |                         |            -              |                -               |               -                |
-| May 13        |                       |                         |            -              |              :smiley:          |              :neutral_face:    |
-| May 14        |                       |                         |        :neutral_face:     |                                |                :neutral_face:  |
-| May 15        |                       |                         |        :fearful:          |                                |                                |
-| May 16        |                       |                         |        :smiley:           |                                |                                |
-| May 17        |                       |                         |        :fearful:          |                                |                                |
-| May 18        |                       |                         |         :neutral_face:    |                                |                                |
-| May 19        |                       |                         |         :smiley:          |                                |                                |
+| May 13        |    :neutral_face:     |                         |            -              |              :smiley:          |              :neutral_face:    |
+| May 14        |    :neutral_face:     |                         |        :neutral_face:     |                                |                :neutral_face:  |
+| May 15        |   :smiley:            |                         |        :fearful:          |                                |                                |
+| May 16        |   :smiley:            |                         |        :smiley:           |                                |                                |
+| May 17        |    :neutral_face:     |                         |        :fearful:          |                                |                                |
+| May 18        |          -            |                         |         :neutral_face:    |                                |                                |
+| May 19        |          -            |                         |         :smiley:          |                                |                                |
 | May 20        |                       |                         |         :neutral_face:    |                                |                                |
 | May 21        |                       |                         |                           |                                |                                |
 | May 22        |                       |                         |                           |                                |                                |
+| May 23        |                       |                         |                           |                                |                                |
+| May 24        |                       |                         |                           |                                |                                |
+| May 25        |                       |                         |                           |                                |                                |
+| May 26        |                       |                         |                           |                                |                                |
+| May 29        |                       |                         |                           |                                |                                |
+| May 30        |                       |                         |                           |                                |                                |
+| May 31        |                       |                         |                           |                                |                                |
+| June 1        |                       |                         |                           |                                |                                |
+| June 2        |                       |                         |                           |                                |                                |
+| June 3        |                       |                         |                           |                                |                                |
+| June 4        |                       |                         |                           |                                |                                |
+
+
 
