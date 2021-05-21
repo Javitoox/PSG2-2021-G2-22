@@ -61,24 +61,24 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 1         |          -            |           -             |           -               |               -                |               -                |
 | May 2         |   :smiley:            |           -             |       :smiley:            |               :smiley:         |        :neutral_face:          |
 | May 3         |   :smiley:            |        :smiley:         |       :smiley:            |               :smiley:         |       :smiley:                 |
-| May 4         |          -            |                         |          -                |                -               |       -                        |
-| May 5         |          -            |                         |          -                |                -               |       -                        |
-| May 6         |   :smiley:            |                         |        :smiley:           |              :neutral_face:    |       :smiley:                 |
-| May 7         |    :neutral_face:     |                         |        :smiley:           |              :neutral_face:    |    :neutral_face:              |
-| May 8         |    :neutral_face:     |                         |       :neutral_face:      |                -               |       :smiley:                 |
-| May 9         |    :neutral_face:     |                         |          -                |              :smiley:          |        :neutral_face:          |
-| May 10        |    :neutral_face:     |                         |          -                |                -               |               -                |
-| May 11        |          -            |                         |         :smiley:          |                -               |               -                |
-| May 12        |   :smiley:            |                         |            -              |                -               |               -                |
-| May 13        |    :neutral_face:     |                         |            -              |              :smiley:          |              :neutral_face:    |
-| May 14        |    :neutral_face:     |                         |        :neutral_face:     |                                |                :neutral_face:  |
-| May 15        |   :smiley:            |                         |        :fearful:          |                                |               -                |
-| May 16        |   :smiley:            |                         |        :smiley:           |                                |               -                |
-| May 17        |    :neutral_face:     |                         |        :fearful:          |                                |               -                |
-| May 18        |          -            |                         |         :neutral_face:    |                                |               -                |
-| May 19        |          -            |                         |         :smiley:          |                                |                :neutral_face:  |
-| May 20        |                       |                         |         :neutral_face:    |                                |                -               |
-| May 21        |                       |                         |                           |                                |                :neutral_face:  |
+| May 4         |          -            |           -             |          -                |                -               |       -                        |
+| May 5         |          -            |           -             |          -                |                -               |       -                        |
+| May 6         |   :smiley:            |        :smiley:         |        :smiley:           |              :neutral_face:    |       :smiley:                 |
+| May 7         |    :neutral_face:     |        :smiley:         |        :smiley:           |              :neutral_face:    |    :neutral_face:              |
+| May 8         |    :neutral_face:     |        :smiley:         |       :neutral_face:      |                -               |       :smiley:                 |
+| May 9         |    :neutral_face:     |           -             |          -                |              :smiley:          |        :neutral_face:          |
+| May 10        |    :neutral_face:     |     :neutral_face:      |          -                |                -               |               -                |
+| May 11        |          -            |           -             |         :smiley:          |                -               |               -                |
+| May 12        |   :smiley:            |           -             |            -              |                -               |               -                |
+| May 13        |    :neutral_face:     |        :smiley:         |            -              |              :smiley:          |              :neutral_face:    |
+| May 14        |    :neutral_face:     |        :smiley:         |        :neutral_face:     |                -               |                :neutral_face:  |
+| May 15        |   :smiley:            |           -             |        :fearful:          |                -               |               -                |
+| May 16        |   :smiley:            |        :smiley:         |        :smiley:           |              :neutral_face:    |               -                |
+| May 17        |    :neutral_face:     |           -             |        :fearful:          |              :neutral_face:    |               -                |
+| May 18        |          -            |        :smiley:         |         :neutral_face:    |              :neutral_face:    |               -                |
+| May 19        |          -            |        :smiley:         |         :smiley:          |                -               |                :neutral_face:  |
+| May 20        |      :fearful:        |        :smiley:         |         :neutral_face:    |                -               |                -               |
+| May 21        |                       |        :smiley:         |                           |              :worried:         |                :neutral_face:  |
 | May 22        |                       |                         |                           |                                |                                |
 | May 23        |                       |                         |                           |                                |                                |
 | May 24        |                       |                         |                           |                                |                                |
