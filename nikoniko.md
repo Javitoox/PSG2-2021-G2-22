@@ -72,13 +72,13 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 12        |   :smiley:            |                         |            -              |                -               |               -                |
 | May 13        |    :neutral_face:     |                         |            -              |              :smiley:          |              :neutral_face:    |
 | May 14        |    :neutral_face:     |                         |        :neutral_face:     |                                |                :neutral_face:  |
-| May 15        |   :smiley:            |                         |        :fearful:          |                                |                                |
-| May 16        |   :smiley:            |                         |        :smiley:           |                                |                                |
-| May 17        |    :neutral_face:     |                         |        :fearful:          |                                |                                |
-| May 18        |          -            |                         |         :neutral_face:    |                                |                                |
-| May 19        |          -            |                         |         :smiley:          |                                |                                |
-| May 20        |                       |                         |         :neutral_face:    |                                |                                |
-| May 21        |                       |                         |                           |                                |                                |
+| May 15        |   :smiley:            |                         |        :fearful:          |                                |               -                |
+| May 16        |   :smiley:            |                         |        :smiley:           |                                |               -                |
+| May 17        |    :neutral_face:     |                         |        :fearful:          |                                |               -                |
+| May 18        |          -            |                         |         :neutral_face:    |                                |               -                |
+| May 19        |          -            |                         |         :smiley:          |                                |                :neutral_face:  |
+| May 20        |                       |                         |         :neutral_face:    |                                |                -               |
+| May 21        |                       |                         |                           |                                |                :neutral_face:  |
 | May 22        |                       |                         |                           |                                |                                |
 | May 23        |                       |                         |                           |                                |                                |
 | May 24        |                       |                         |                           |                                |                                |
