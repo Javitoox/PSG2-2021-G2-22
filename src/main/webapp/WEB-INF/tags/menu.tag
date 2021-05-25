@@ -101,7 +101,7 @@
 							<strong><sec:authentication property="name" /></strong> <span
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" >
 							<li>
 								<div class="navbar-login">
 									<div class="row">
@@ -111,12 +111,12 @@
 											</p>
 										</div>
 										<div class="col-lg-8">
-											<p class="text-left">
+											<p class="text-center">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
-											<p class="text-left">
+											<p class="text-center">
 												<a href="<c:url value="/logout" />"
-													class="btn btn-primary btn-block btn-sm"><fmt:message key="label.menu.logout"/></a>
+													class="btn btn-default btn-block btn-sm"><fmt:message key="label.menu.logout"/></a>
 											</p>
 										</div>
 									</div>
