@@ -140,6 +140,17 @@
 -->
 						</ul></li>
 				</sec:authorize>
+				<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-globe"></span> 
+						</a>
+						
+						<ul class="dropdown-menu">
+							<li><a href='<spring:url value="?lang=es"/>'><fmt:message key="spanish" /></a></li>
+                            <li><a href='<spring:url value="?lang=en"/>'><fmt:message key="english" /></a></li>
+						</ul>
+						
+				</li>
 			</ul>
 		</div>
 
