@@ -110,13 +110,13 @@
                                 </spring:url>
                                 <a href="${fn:escapeXml(visitUrl)}"><fmt:message key="label.ownersDetails.addVisit"/></a>
                             </td>
-                            <td>
+                           <td><c:if test="${authenticatedOwner==pet.owner}">
                 				<spring:url value="/owners/{ownerId}/pets/{petId}/delete" var="deletePetUrl">
                 					<spring:param name="ownerId" value="${owner.id}"/>
                         			<spring:param name="petId" value="${pet.id}"/>
                     			</spring:url>
                     			<a href="${fn:escapeXml(deletePetUrl)}" class="btn btn-default"><fmt:message key="label.ownersDetails.deletePet"/></a>
-                			</td>
+                			</c:if></td>
                 			<td>
                     			<c:if test="${pet.inAdoption !=  true}">                				
                 				<spring:url value="/owners/{ownerId}/pets/{petId}/inAdoption" var="inAdoptionPetUrl">

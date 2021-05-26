@@ -152,31 +152,17 @@ public class PetController {
 	}
 
 	@GetMapping(value = "/pets/{petId}/delete")
-	public ModelAndView processDeletePet(@PathVariable("petId") int petId, Owner owner,Map<String,Object> model,Authentication authentication) {
-		ModelAndView mav = new ModelAndView();
-		
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		Integer loggedOwnerId = this.ownerService.findOwnerByUsername(userDetails.getUsername()).getId();
-		Owner loggedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
-		mav.addObject("loggedOwnerId", loggedOwnerId);
-		model.put("loggedOwner", loggedOwner);
-		
+	public String processDeletePet(@PathVariable("petId") int petId, Owner owner, Model model) {
 		Pet pet = petService.findPetById(petId);
-		
 		Collection<Reservation> reservations = reservationService.findReservationsByPetId(petId);
-		if (pet.getOwner().getId() != loggedOwnerId) {
-			mav.setViewName("noPermission");
-			return mav;
-		}
-		else if (pet != null && pet.getOwner().getId() == loggedOwnerId) {
+		if (pet != null && pet.getOwner().equals(owner)) {
 			ownerService.findOwnerById(owner.getId()).removePet(pet);
 			reservationService.deleteAllReservations(reservations);
 			petService.deletePet(pet);
 			ownerService.saveOwner(owner);
-			mav.setViewName(OWNERS_INIT_REDIRECT);
-			return mav;
+			return OWNERS_INIT_REDIRECT;
 		} else {
-			throw new IllegalArgumentException("Mascota no encontrada");
+			return OWNERS_INIT_REDIRECT;
 		}
 	}
 

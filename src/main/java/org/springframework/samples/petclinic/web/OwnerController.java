@@ -24,6 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+	private static final String REDIRECT_OWNERS = "redirect:/owners";
 
 	private final OwnerService ownerService;
 
@@ -84,8 +87,10 @@ public class OwnerController {
 	}
 
 	@GetMapping(value = "/owners")
-	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
-
+	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model,Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner authenticatedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		model.put("authenticatedOwner", authenticatedOwner);
 		// allow parameterless GET request for /owners to return all records
 		if (owner.getLastName() == null) {
 			owner.setLastName(""); // empty string signifies broadest possible search
@@ -136,16 +141,24 @@ public class OwnerController {
 	 * @return a ModelMap with the model attributes for the view
 	 */
 	@GetMapping("/owners/{ownerId}")
-	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
+	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId,Map<String, Object> model,Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner authenticatedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		model.put("authenticatedOwner", authenticatedOwner);
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		mav.addObject(this.ownerService.findOwnerById(ownerId));
 		return mav;
 	}
 	@GetMapping(value = "/owners/{ownerId}/deleteOwner")
-	public String deleteOwner(@PathVariable("ownerId")final int ownerId, final Model model) {
+	public String deleteOwner(@PathVariable("ownerId")final int ownerId, final Model model, Authentication authentication) {
 		Owner owner = ownerService.findOwnerById(ownerId);	
-		ownerService.deleteOwner(owner);	
-		return "redirect:/owners";
-	
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner authenticatedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		if(!owner.equals(authenticatedOwner)) {
+			return REDIRECT_OWNERS;
+		}
+		ownerService.deleteOwner(owner);
+		return REDIRECT_OWNERS;
 	}
 }
