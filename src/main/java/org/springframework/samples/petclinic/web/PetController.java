@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -151,17 +152,31 @@ public class PetController {
 	}
 
 	@GetMapping(value = "/pets/{petId}/delete")
-	public String processDeletePet(@PathVariable("petId") int petId, Owner owner, Model model) {
+	public ModelAndView processDeletePet(@PathVariable("petId") int petId, Owner owner,Map<String,Object> model,Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Integer loggedOwnerId = this.ownerService.findOwnerByUsername(userDetails.getUsername()).getId();
+		Owner loggedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		mav.addObject("loggedOwnerId", loggedOwnerId);
+		model.put("loggedOwner", loggedOwner);
+		
 		Pet pet = petService.findPetById(petId);
+		
 		Collection<Reservation> reservations = reservationService.findReservationsByPetId(petId);
-		if (pet != null && pet.getOwner().equals(owner)) {
+		if (pet.getOwner().getId() != loggedOwnerId) {
+			mav.setViewName("noPermission");
+			return mav;
+		}
+		else if (pet != null && pet.getOwner().getId() == loggedOwnerId) {
 			ownerService.findOwnerById(owner.getId()).removePet(pet);
 			reservationService.deleteAllReservations(reservations);
 			petService.deletePet(pet);
 			ownerService.saveOwner(owner);
-			return OWNERS_INIT_REDIRECT;
+			mav.setViewName(OWNERS_INIT_REDIRECT);
+			return mav;
 		} else {
-			throw new IllegalArgumentException("Pet not found.");
+			throw new IllegalArgumentException("Mascota no encontrada");
 		}
 	}
 
