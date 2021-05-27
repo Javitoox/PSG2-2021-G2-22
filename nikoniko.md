@@ -79,12 +79,12 @@ In the retrospective meeting, the team has a discussion about those results.
 | May 19        |          -            |        :smiley:         |         :smiley:          |                -               |                :neutral_face:  |
 | May 20        |      :fearful:        |        :smiley:         |         :neutral_face:    |                -               |              :smiley:          |
 | May 21        |    :neutral_face:     |        :smiley:         |                           |              :worried:         |                :neutral_face:  |
-| May 22        |          -            |                         |                           |                                |                                |
-| May 23        |    :neutral_face:     |                         |                           |                                |                                |
-| May 24        |   :smiley:            |                         |                           |                                |                                |
-| May 25        |          -            |                         |                           |                                |                                |
-| May 26        |      :fearful:        |                         |                           |                                |                                |
-| May 27        |                       |                         |                           |                                |                                |
+| May 22        |          -            |                         |                           |                                |                -               |
+| May 23        |    :neutral_face:     |                         |                           |                                |              :smiley:          |
+| May 24        |   :smiley:            |                         |                           |                                |                :neutral_face:  |
+| May 25        |          -            |                         |                           |                                |              :smiley:          |
+| May 26        |      :fearful:        |                         |                           |                                |              :smiley:          |
+| May 27        |                       |                         |                           |                                |                :neutral_face:  |
 | May 28        |                       |                         |                           |                                |                                |
 | May 29        |                       |                         |                           |                                |                                |
 | May 30        |                       |                         |                           |                                |                                |
