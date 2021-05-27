@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -33,6 +34,7 @@ public class Cause extends BaseEntity{
 	private Double goal;
 	
 	@Column(name="donations")
+	@Digits(integer = 1000, fraction = 2)
 	private Double donations;
 	
 	@Column(name="organization")

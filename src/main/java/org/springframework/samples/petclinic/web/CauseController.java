@@ -78,7 +78,7 @@ public class CauseController {
 	@PostMapping("/donate/{id}")
     public String donateToCause(@PathVariable("id") Integer id, @Valid Cause cause, BindingResult result, Authentication authentication, ModelMap model) {
 		if(cause.getDonations() == null || result.hasFieldErrors("donations") || cause.getDonations()<0) {
-			model.addAttribute(CAUSES_RESULT, "Debe insertar un valor númerico positivo");
+			model.addAttribute(CAUSES_RESULT, "Debe insertar un valor númerico positivo con máximo 2 decimales");
 		}else {
 			Cause originalCause = this.causeService.findCauseById(id).orElse(null);
 			if(originalCause == null) {
