@@ -101,7 +101,7 @@
 							<strong><sec:authentication property="name" /></strong> <span
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" >
 							<li>
 								<div class="navbar-login">
 									<div class="row">
@@ -111,12 +111,12 @@
 											</p>
 										</div>
 										<div class="col-lg-8">
-											<p class="text-left">
+											<p class="text-center">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
-											<p class="text-left">
+											<p class="text-center">
 												<a href="<c:url value="/logout" />"
-													class="btn btn-primary btn-block btn-sm"><fmt:message key="label.menu.logout"/></a>
+													class="btn btn-default btn-block btn-sm"><fmt:message key="label.menu.logout"/></a>
 											</p>
 										</div>
 									</div>
@@ -140,6 +140,17 @@
 -->
 						</ul></li>
 				</sec:authorize>
+				<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-globe"></span> 
+						</a>
+						
+						<ul class="dropdown-menu">
+							<li><a href='<spring:url value="?lang=es"/>'><fmt:message key="spanish" /></a></li>
+                            <li><a href='<spring:url value="?lang=en"/>'><fmt:message key="english" /></a></li>
+						</ul>
+						
+				</li>
 			</ul>
 		</div>
 
