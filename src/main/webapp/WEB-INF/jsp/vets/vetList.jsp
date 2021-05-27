@@ -40,7 +40,9 @@
                 <spring:url value="/vets/{vetId}/delete" var="deleteVetUrl">
                 	<spring:param name="vetId" value="${vet.id}"/>
                 </spring:url>
+                <sec:authorize access="hasAuthority('admin')">
                 <a href="${fn:escapeXml(deleteVetUrl)}" class="glyphicon glyphicon-remove-circle"></a>
+                </sec:authorize>
                 </td>
             </tr>
         </c:forEach>
