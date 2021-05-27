@@ -45,12 +45,12 @@
                         <c:out value="${pet.name} "/>
                     </c:forEach>
                 </td>
-                <td>
+                <td><c:if test="${authenticatedOwner==owner}">
                 	<spring:url value="/owners/{ownerId}/deleteOwner" var="deleteOwnerUrl">
                         <spring:param name="ownerId" value="${owner.id}"/>
                     </spring:url>
                     <a href="${fn:escapeXml(deleteOwnerUrl)}" class="glyphicon glyphicon-remove-circle"></a>
-                </td>
+                 </c:if></td>
                 
       
 <!--
