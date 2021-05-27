@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -161,7 +162,7 @@ public class PetController {
 			ownerService.saveOwner(owner);
 			return OWNERS_INIT_REDIRECT;
 		} else {
-			throw new IllegalArgumentException("Pet not found.");
+			return OWNERS_INIT_REDIRECT;
 		}
 	}
 

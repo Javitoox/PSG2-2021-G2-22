@@ -141,7 +141,10 @@ public class OwnerController {
 	 * @return a ModelMap with the model attributes for the view
 	 */
 	@GetMapping("/owners/{ownerId}")
-	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
+	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId,Map<String, Object> model,Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Owner authenticatedOwner = this.ownerService.findOwnerByUsername(userDetails.getUsername());
+		model.put("authenticatedOwner", authenticatedOwner);
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		mav.addObject(this.ownerService.findOwnerById(ownerId));
 		return mav;
