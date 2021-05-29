@@ -87,6 +87,12 @@
 					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 					<span><fmt:message key="label.health"/></span>
 				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'support'}" url="/support"
+					title="support">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					<span><fmt:message key="label.support"/></span>
+				</petclinic:menuItem>
 
 			</ul>
 
