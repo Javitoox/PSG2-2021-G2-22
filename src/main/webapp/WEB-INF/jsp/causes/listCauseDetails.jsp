@@ -9,7 +9,7 @@
 
 
 <petclinic:layout pageName="causes">
-    <h2>Causa '${cause.name}'</h2>
+    <h2><c:out value="${cause.name}"/></h2>
 
     <table id="causesTable" class="table table-striped">
         <thead>
